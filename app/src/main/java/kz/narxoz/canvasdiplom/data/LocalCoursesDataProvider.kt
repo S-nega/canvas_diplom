@@ -1,6 +1,8 @@
 package kz.narxoz.canvasdiplom.data
 
 import kz.narxoz.canvasdiplom.models.Course
+import kz.narxoz.canvasdiplom.models.User
+import kz.narxoz.canvasdiplom.models.UserRole
 
 object LocalCoursesDataProvider {
 
@@ -8,32 +10,41 @@ object LocalCoursesDataProvider {
         Course(
             id = 1,
             title = "Mobile Developing",
-            teacher = "Agay",
+            teacher = LocalUsersDataProvider.getStaticUsersData().first { it.role == UserRole.TEACHER },
             code = "MD4",
-            score = 0,
-            classRoom = "GUK 412",
+//            score = 0,
+//            classRoom = "GUK 412",
             credits = 6,
-            isRegistered = false
+            hoursPerWeek = 3,
+            students = LocalUsersDataProvider.getStaticUsersData(),
+            tasks = mutableListOf(),
+            courseTable = mutableListOf()
         ),
         Course(
-            id = 2,
-            title = "CISCO",
-            teacher = "Agay",
-            code = "C3",
-            score = 0,
-            classRoom = "GUK 512",
-            credits = 7,
-            isRegistered = false
+            id = 1,
+            title = "Mobile Developing",
+            teacher = LocalUsersDataProvider.getStaticUsersData().first { it.role == UserRole.TEACHER },
+            code = "MD4",
+//            score = 0,
+//            classRoom = "GUK 412",
+            credits = 6,
+            hoursPerWeek = 3,
+            students = LocalUsersDataProvider.getStaticUsersData(),
+            tasks = mutableListOf(),
+            courseTable = mutableListOf()
         ),
         Course(
-            id = 3,
-            title = "Linux",
-            teacher = "Agay",
-            code = "OSL4",
-            score = 0,
-            classRoom = "GUK 501",
-            credits = 7,
-            isRegistered = true
+            id = 1,
+            title = "Mobile Developing",
+            teacher = LocalUsersDataProvider.getStaticUsersData().first { it.role == UserRole.TEACHER },
+            code = "MD4",
+//            score = 0,
+//            classRoom = "GUK 412",
+            credits = 6,
+            hoursPerWeek = 3,
+            students = LocalUsersDataProvider.getStaticUsersData(),
+            tasks = mutableListOf(),
+            courseTable = mutableListOf()
         )
     )
 

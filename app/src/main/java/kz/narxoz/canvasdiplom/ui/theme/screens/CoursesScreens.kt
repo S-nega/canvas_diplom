@@ -38,9 +38,9 @@ fun CourseCard(
         Row {
             Column {
                 Text(text = course.title)
-                Text(text = course.teacher)
+                Text(text = course.teacher.name + " " + course.teacher.surname)
             }
-            Text(text = course.score.toString())
+//            Text(text = course.tasks)
         }
     }
 }

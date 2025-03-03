@@ -8,7 +8,8 @@ data class User(
     val email: String,
     val login: String,
     val password: String,
-    val role: UserRole
+    val role: UserRole,
+    val courses: List<Course>, // teachers courses too
 )
 
 enum class UserRole {
