@@ -21,7 +21,7 @@ object LocalCoursesDataProvider {
             courseTable = mutableListOf()
         ),
         Course(
-            id = 1,
+            id = 2,
             title = "Mobile Developing",
             teacher = LocalUsersDataProvider.getStaticUsersData().first { it.role == UserRole.TEACHER },
             code = "MD4",
@@ -34,7 +34,7 @@ object LocalCoursesDataProvider {
             courseTable = mutableListOf()
         ),
         Course(
-            id = 1,
+            id = 3,
             title = "Mobile Developing",
             teacher = LocalUsersDataProvider.getStaticUsersData().first { it.role == UserRole.TEACHER },
             code = "MD4",

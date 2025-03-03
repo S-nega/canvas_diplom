@@ -1,7 +1,7 @@
 package kz.narxoz.canvasdiplom.models
 
 data class User(
-    val id: Int,
+    val id: String,
     val name: String,
     val surname: String,
     val contact: String,
