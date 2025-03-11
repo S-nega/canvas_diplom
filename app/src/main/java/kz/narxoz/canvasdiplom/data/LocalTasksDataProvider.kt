@@ -119,4 +119,7 @@ object LocalTasksDataProvider {
             )
         )
     )
+
+//    fun getStaticTasksData(): List<Task> = staticTasksData
+
 }

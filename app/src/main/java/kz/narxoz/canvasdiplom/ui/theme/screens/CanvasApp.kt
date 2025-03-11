@@ -10,6 +10,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,8 +30,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import kz.narxoz.canvasdiplom.R
+import kz.narxoz.canvasdiplom.TasksViewModel
+import kz.narxoz.canvasdiplom.models.User
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
+import kz.narxoz.canvasdiplom.ui.theme.Typography
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import java.util.Calendar
 
@@ -34,7 +45,7 @@ fun CanvasApp(
     modifier: Modifier = Modifier,
 //    context: Context
 ){
-//    val viewModel: SportsViewModel = viewModel()
+//    val viewModel: TasksViewModel = viewModel()
 //    val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
@@ -113,17 +124,45 @@ fun CalendarScreen(
 
 @Composable
 fun CanvasAppTopBar(
-    title: String
+    title: String,
+//    currentUser: User,
+    isMainPage: Boolean? = false, // may be it's better to get Back-Page and if it is we show back-icon ??
+    isAbleAdding: Boolean? = false,
 ){ // does we need it?
     Row(
         modifier = Modifier
             .padding(dimensionResource(id = R.dimen.padding_medium))
             .fillMaxWidth(),
-        verticalAlignment = Alignment.Top,
+        verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ){
-        Text(text = title)
-        Text(text = "+")// only in Courses block
+        Row (
+            modifier = Modifier,
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            if (!isMainPage!!) {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowLeft,
+                        contentDescription = "back"
+                    )
+                }
+            }
+            Text(
+                text = title,
+                style = Typography.titleLarge
+            )
+        }
+        if (isAbleAdding!!) {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Add"
+                )
+            }
+        }
+//        Text(text = "+")// only in Courses block
     }
 }
 
@@ -137,25 +176,28 @@ fun CanvasAppBottomBar() {
     ){
         IconButton(onClick = { /*OPEN PROFILE SCREEN*/ }) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                imageVector = Icons.Default.AccountCircle,
                 contentDescription = "Profile"
             )
         }
         IconButton(onClick = { /*TODO*/ }) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                imageVector = Icons.Default.Notifications,
+//                painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 contentDescription = "Info Panel"
             )
         }
         IconButton(onClick = { /*TODO*/ }) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                imageVector = Icons.Default.DateRange,
+//                painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 contentDescription = "Calendar"
             )
         }
         IconButton(onClick = { /*TODO*/ }) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                imageVector = Icons.Default.List,
+//                painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 contentDescription = "Courses"
             )
         }

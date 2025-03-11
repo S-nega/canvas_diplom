@@ -29,8 +29,8 @@ class MainActivity : ComponentActivity() {
                     val windowSize = calculateWindowSizeClass(this)
                     val context = LocalContext.current
                     CanvasApp(
-                        context = context,
-                        windowSize = windowSize.widthSizeClass,
+//                        context = context,
+//                        windowSize = windowSize.widthSizeClass,
                     )
                 }
             }

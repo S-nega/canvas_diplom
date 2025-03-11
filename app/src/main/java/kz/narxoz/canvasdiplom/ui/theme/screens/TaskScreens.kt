@@ -1,11 +1,9 @@
 package kz.narxoz.canvasdiplom.ui.theme.screens
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -18,7 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import kz.narxoz.canvasdiplom.R
+import kz.narxoz.canvasdiplom.TasksViewModel
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
 import kz.narxoz.canvasdiplom.models.Course
 import kz.narxoz.canvasdiplom.models.Task
@@ -30,9 +31,12 @@ import kz.narxoz.canvasdiplom.ui.theme.Typography
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TasksScreen(
+//    navController: NavController,
     user: User,
     course: Course
 ) {
+    val viewModel: TasksViewModel = viewModel()
+
 //    Scaffold(
 //        topBar = {
 //            TopAppBar(
@@ -74,7 +78,8 @@ fun TasksScreen(
 //        } )
 
     Column {
-        CanvasAppTopBar(course.title)
+        val isAbleAdding = user.role == UserRole.TEACHER
+        CanvasAppTopBar(course.title, isAbleAdding = isAbleAdding)
 
         val filteredTasks = course.tasks
         TasksList(user = user, filteredTasks = filteredTasks, course = course)
@@ -95,6 +100,7 @@ fun BottomAppBar() {
 
 @Composable
 fun TasksList(
+    viewModel: TasksViewModel = viewModel(),
     filteredTasks: List<Task>,
     user: User,
     course: Course,
@@ -105,7 +111,12 @@ fun TasksList(
             .padding(dimensionResource(id = R.dimen.padding_medium))
     ) {
         items(filteredTasks) { task ->
-            TaskCard(user = user, task = task, course = course)
+            TaskCard(
+                user = user,
+                task = task,
+                course = course,
+                onClick = { viewModel.navigateToDetailPage() }
+            )
         }
     }
 }
@@ -115,14 +126,17 @@ fun TaskCard(
     user: User,
     task: Task,
     course: Course,
+    onClick: (Task) -> Unit
 ) {
     val grade = task.scores.find { it.studentId == user.id }?.grade
+
 
     Card(
         modifier = Modifier
             .padding(
                 bottom = dimensionResource(id = R.dimen.padding_small)
             )
+//            .clickable { onClick() }
     ) {
         Row(
             modifier = Modifier
