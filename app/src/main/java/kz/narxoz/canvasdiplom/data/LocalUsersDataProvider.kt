@@ -14,7 +14,8 @@ object LocalUsersDataProvider {
             email = "snezhana.golovko@narxoz.kz",
             login = "s23016985",
             password = "qweqwe",
-            role = UserRole.STUDENT
+            role = UserRole.STUDENT,
+            courses = LocalCoursesDataProvider.getStaticCoursesData()
         ),
         User(
             id = 2,
@@ -24,7 +25,8 @@ object LocalUsersDataProvider {
             email = "snezhana.golovko@narxoz.kz",
             login = "s23016985",
             password = "qweqwe",
-            role = UserRole.TEACHER
+            role = UserRole.TEACHER,
+            courses = LocalCoursesDataProvider.getStaticCoursesData()
         ),
         User(
             id = 3,
@@ -34,7 +36,8 @@ object LocalUsersDataProvider {
             email = "snezhana.golovko@narxoz.kz",
             login = "s23016985",
             password = "qweqwe",
-            role = UserRole.MODERATOR
+            role = UserRole.MODERATOR,
+            courses = LocalCoursesDataProvider.getStaticCoursesData()
         )
     )
 
