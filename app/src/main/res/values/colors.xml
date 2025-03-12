@@ -7,4 +7,219 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#D80C0C</color>
+    <color name="red_15">#26D80C0C</color>
+    <color name="gray_75">#333030</color>
+    <color name="gray_50">#847E7E</color>
+    <color name="gray_25">#D9D9D9</color>
+
+    <color name="title_text_color">#262626</color>
+    <color name="body_text_color">#404040</color>
+    <color name="subtitle_text_color">#80000000</color>
+    <color name="inactive_state_text_color">#80808080</color>
+    <color name="link_text_color">#0074FC</color>
+
+    <color name="selection_text_color">#00B071</color>
+    <color name="negative_max_color">#000000</color>
+    <color name="success_color">#09A865</color>
+
+    <!--    shades-->
+    <color name="funka_1_color">#808080</color>
+    <color name="niva_0_color">#F2F2F2</color>
+    <color name="niva_1_color">#FFFFFF</color>
+
+
+    <color name="meza_2_opacity_95">#F2808080</color>
+
+    <color name="nigra_100_color">#000000</color>
+    <color name="negative_masks_color">#000000</color>
+    <color name="disabled_color_button">#CBCBCB</color>
+    <color name="blue_color_calendar">#33008EF5</color>
+
+    <color name="meza_2_color_20">#33808080</color>
+    <color name="meza_2_color_10">#1A808080</color>
+    <color name="meza_2_color_8">#14808080</color>
+    <color name="basic_color">#E6000000</color>
+    <color name="vualo">#FFFFFF</color>
+
+    <!--    colors-->
+
+    <color name="blue_dark_color">#0083FC</color>
+    <color name="icon_share_color">#000000</color>
+    <color name="greeno_color">#00B071</color>
+    <color name="orange_color">#E27335</color>
+    <color name="reda_color">#DA454E</color>
+    <color name="indigo_color">#3F5DC9</color>
+    <color name="bluo_op_color">#330083FC</color>
+    <color name="greeno_op_color">#3300B071</color>
+    <color name="orange_op_color">#33E27335</color>
+    <color name="reda_op_color">#33DA454E</color>
+    <color name="indigo_op_color">#333F5DC9</color>
+    <color name="ambro">#FBCF33</color>
+    <color name="ambro_light_color">#FF9900</color>
+    <color name="prime_corporate">#1B59E2</color>
+    <color name="bg_onboarding">#ffffff</color>
+    <color name="finance_corporate">#6966F3</color>
+    <color name="finance_corporate_light">#4744C1</color>
+    <color name="finance_corporate_bay">#3B38B5</color>
+    <color name="finance_icon_blue">#6461FF</color>
+    <color name="finance_input_layout">#ffffff</color>
+    <color name="main_background_color">#E3E3E3</color>
+    <color name="grey_opacity">#80000000</color>
+    <color name="grey_opacity_20">#33000000</color>
+    <color name="duona_40">#66000000</color>
+
+    <color name="white_opacity_25">#40FFFFFF</color>
+<!--    <color name="black">#000000</color>-->
+    <color name="black_40">#66000000</color>
+<!--    <color name="white">#ffffff</color>-->
+    <color name="blue">#224CE2</color>
+    <color name="light_system_blue">#007AFF</color>
+    <color name="light_blue">#F8FAFF</color>
+    <color name="blue_gray">#7E88A4</color>
+    <color name="frame">#CFD7E8</color>
+    <color name="hover">#C0C8DC</color>
+    <color name="disabled">#ECF0F8</color>
+    <color name="red_0">#FA4550</color>
+    <color name="red_1">#FF545E</color>
+    <color name="red_2">#FF6770</color>
+    <color name="red_3">#FF8087</color>
+    <color name="red_4">#FFF2F3</color>
+    <color name="red_5">#FD5662</color>
+    <color name="orange_0">#FF951B</color>
+    <color name="orange_1">#FFA134</color>
+    <color name="orange_2">#FFB662</color>
+    <color name="orange_3">#FFCE96</color>
+    <color name="orange_4">#FDA142</color>
+    <color name="purple_0">#4E3ADE</color>
+    <color name="purple_1">#5B49DD</color>
+    <color name="purple_2">#705FEA</color>
+    <color name="purple_3">#7C6DEF</color>
+    <color name="purple_4">#5C4FDA</color>
+    <color name="dark_green">#31BA7C</color>
+    <color name="green_0">#1EC078</color>
+    <color name="green_1">#30C884</color>
+    <color name="green_2">#4ACE93</color>
+    <color name="green_3">#78D4AB</color>
+    <color name="green_4">#3AC786</color>
+    <color name="grey_dark">#7E88A4</color>
+    <color name="grey_dark_1">#737C92</color>
+    <color name="grey_0">#B8C2DA</color>
+    <color name="grey_3">#E3EAF8</color>
+    <color name="grey_2">#E5EAF5</color>
+    <color name="grey_4">#F5F7FA</color>
+    <color name="orange_dark">#F08911</color>
+    <color name="bg_color">#F2F8FB</color>
+    <color name="light_gray">#99FFFFFF</color>
+    <color name="transparent">#00ffffff</color>
+    <color name="light_grey">#6BFFFFFF</color>
+    <color name="frame_dark">#353535</color>
+    <color name="frame_green">#30C884</color>
+    <color name="prime">#3C85F3</color>
+    <color name="credit">#6C06E8</color>
+    <color name="violet_medium">#B583F3</color>
+    <color name="pink_0">#D149DD</color>
+    <color name="pink_1">#CF50DB</color>
+    <color name="cyan">#4ACBEB</color>
+    <color name="grey_stories">#40FFFFFF</color>
+    <color name="border_color_grey_40">#66808080</color>
+    <color name="counter_text_color_85">#D9000000</color>
+    <color name="total_contrast_color">#000000</color>
+    <color name="grey_20_color">#33080808</color>
+
+    <!-- Adaptive Colors -->
+    <color name="apStrokeStoriesUnwatched">#30C884</color>
+    <color name="apBannersIndicatorSelected">#30C884</color>
+
+    <color name="opposita_color">#000000</color>
+    <color name="mezo_40">#66808080</color>
+    <color name="mezo_20">#33808080</color>
+    <color name="mezo_10">#1A808080</color>
+
+    <color name="meadow">#18BB4F</color>
+    <color name="meadow_15">#2618BB4F</color>
+    <color name="azure">#008EFF</color>
+    <color name="azure_15">#26008EFF</color>
+    <color name="persea">#2539D7</color>
+    <color name="persea_15">#262539D7</color>
+    <color name="madison">#0A1F61</color>
+    <color name="madison_15">#260A1F61</color>
+    <color name="tropicana">#C8E1FA</color>
+    <color name="tropicana_15">#26C8E1FA</color>
+    <color name="lima">#80D119</color>
+    <color name="lima_15">#2680D119</color>
+    <color name="orange">#FF8718</color>
+    <color name="orange_15">#26FF8718</color>
+    <color name="mellon">#F3434E</color>
+    <color name="mellon_15">#26F3434E</color>
+    <color name="mandarin">#FF522D</color>
+    <color name="mandarin_15">#26FF522D</color>
+    <color name="cherry">#C92140</color>
+    <color name="cherry_15">#26C92140</color>
+    <color name="mango_general">#FFCD1C</color>
+    <color name="mango_general_15">#26FFCD1C</color>
+
+    <!--not used in new library-->
+    <color name="meadow_20">#3318BB4F</color>
+    <color name="azure_20">#33008EFF</color>
+    <color name="azure_15_without_alpha">#bdd2e3</color>
+    <color name="orange_20">#33FF8718</color>
+
+
+    <!-- mycar finance general colors -->
+    <color name="koamaru">#1E1169</color>
+    <color name="bay">#3B38B5</color>
+    <color name="cornflower">#6461FF</color>
+    <color name="fog">#DAD5FF</color>
+
+
+    <!-- converted colors -->
+    <!-- for texts and objects(img, shape) -->
+    <color name="inko_100">#000000</color>
+    <color name="inko_75">#BF000000</color>
+    <color name="inko_50">#80000000</color>
+    <color name="inko_25">#40000000</color>
+    <color name="inko_15">#26000000</color>
+    <color name="inko_10">#1A000000</color>
+    <color name="inko_5">#0D000000</color>
+
+    <color name="blue_a">#0A1F61</color>
+    <color name="blue_a15">#260A1F61</color>
+    <color name="blue_b">#C8E1FA</color>
+    <color name="blue_b15">#26C8E1FA</color>
+    <color name="lime">#B0DC00</color>
+    <color name="lime_15">#26B0DC00</color>
+    <color name="lemon">#E7D000</color>
+    <color name="lemon_15">#26E7D000</color>
+    <color name="mango">#F1BC00</color>
+    <color name="mango_15">#26F1BC00</color>
+
+    <color name="bazo_100">#FFFFFF</color>
+    <color name="bazo_80">#CCFFFFFF</color>
+
+    <!-- background -->
+    <color name="papera_80">#CCFFFFFF</color>
+
+
+    <!-- text fill colors -->
+    <color name="text_fill_basic_color">#000000</color>
+
+    <color name="text_fill_title_color">#D9000000</color>
+    <color name="text_fill_body_color">#BF000000</color>
+    <color name="text_fill_subtitle_color">#80000000</color>
+    <color name="text_fill_total_contrast">#000000</color>
+    <color name="text_fill_inverted_contrast">#FFFFFF</color>
+
+    <color name="text_fill_inactive_color">#80808080</color>
+    <color name="text_fill_white_color">#FFFFFF</color>
+    <color name="text_fill_black_color">#000000</color>
+
+
+    <color name="bluo_color">#0074FC</color>
+    <color name="subtitle_text_color_60">#99808080</color>
+    <color name="active_text_color">#1A1A1A</color>
+    <color name="meza_2_color_60">#99808080</color>
+    <color name="alert_text_color">#DA454E</color>
+    <color name="meza_0_color">#80808080</color>
+    <color name="papera_80_color">#CCFFFFFF</color>
 </resources>

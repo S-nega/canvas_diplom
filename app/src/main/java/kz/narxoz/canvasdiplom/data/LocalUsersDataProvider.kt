@@ -7,7 +7,7 @@ object LocalUsersDataProvider {
 
     private var staticUsersData = mutableListOf<User>(
         User(
-            id = 1,
+            id = "S1",
             name = "Snezhana",
             surname = "Golovko",
             contact = "+77077446255",
@@ -18,7 +18,7 @@ object LocalUsersDataProvider {
             courses = LocalCoursesDataProvider.getStaticCoursesData()
         ),
         User(
-            id = 2,
+            id = "S2",
             name = "Snezhana",
             surname = "Golovko",
             contact = "+77077446255",
@@ -29,7 +29,7 @@ object LocalUsersDataProvider {
             courses = LocalCoursesDataProvider.getStaticCoursesData()
         ),
         User(
-            id = 3,
+            id = "S3",
             name = "Snezhana",
             surname = "Golovko",
             contact = "+77077446255",

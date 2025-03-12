@@ -30,26 +30,10 @@ class MainActivity : ComponentActivity() {
                     val context = LocalContext.current
                     CanvasApp(
                         context = context,
-                        windowSize = windowSize.widthSizeClass,
+//                        windowSize = windowSize.widthSizeClass,
                     )
                 }
             }
         }
     }
 }
-//
-//@Composable
-//fun Greeting(name: String, modifier: Modifier = Modifier) {
-//    Text(
-//        text = "Hello $name!",
-//        modifier = modifier
-//    )
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    CanvasDiplomTheme {
-//        Greeting("Android")
-//    }
-//}
