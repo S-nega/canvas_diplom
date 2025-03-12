@@ -67,12 +67,6 @@ fun IndividualStudyPlanScreen(
 }
 
 
-
-
-
-
-
-
 @Composable
 fun CoursesTopBar(
     modifier: Modifier
