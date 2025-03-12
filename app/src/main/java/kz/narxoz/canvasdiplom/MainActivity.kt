@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     val windowSize = calculateWindowSizeClass(this)
                     val context = LocalContext.current
                     CanvasApp(
-//                        context = context,
+                        context = context,
 //                        windowSize = windowSize.widthSizeClass,
                     )
                 }
@@ -37,19 +37,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-//
-//@Composable
-//fun Greeting(name: String, modifier: Modifier = Modifier) {
-//    Text(
-//        text = "Hello $name!",
-//        modifier = modifier
-//    )
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    CanvasDiplomTheme {
-//        Greeting("Android")
-//    }
-//}
