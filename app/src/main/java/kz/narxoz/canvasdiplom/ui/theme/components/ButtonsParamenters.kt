@@ -10,7 +10,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kz.narxoz.canvasdiplom.R
 import kz.narxoz.canvasdiplom.ui.theme.body2MediumTextStyle
-import kz.narxoz.canvasdiplom.ui.theme.button1TextStyle
+import kz.narxoz.canvasdiplom.ui.theme.buttonLTextStyle
+import kz.narxoz.canvasdiplom.ui.theme.buttonMTextStyle
+import kz.narxoz.canvasdiplom.ui.theme.buttonSTextStyle
+import kz.narxoz.canvasdiplom.ui.theme.buttonXLTextStyle
 
 data class ButtonParameters(
     val cornerRadius: Dp,
@@ -50,7 +53,7 @@ fun GetButtonParameters(
     val shadowElevation = if (style == ButtonStyles.ELEVATED) 16.dp else 0.dp
     val tonalElevation = if (style == ButtonStyles.ELEVATED) 2.dp else 0.dp
 
-    val textStyle = size?.textStyle.let { button1TextStyle }
+    val textStyle = size?.textStyle.let { buttonMTextStyle }
 
     val contentColor = when {
         style != null -> colorResource(id = style.textColor)
@@ -126,24 +129,25 @@ enum class ButtonSizes(
         cornerRadius = 16.dp,
         buttonHeight = 32.dp,
         PaddingValues(12.dp, 8.dp),
-        textStyle = button1TextStyle
+        textStyle = buttonSTextStyle
     ),
     M(
         cornerRadius = 20.dp,
         buttonHeight = 40.dp,
         PaddingValues(16.dp, 12.dp),
-        textStyle = button1TextStyle
+        textStyle = buttonMTextStyle
     ),
     L(
         cornerRadius = 24.dp,
         buttonHeight = 48.dp,
         PaddingValues(20.dp, 16.dp),
-        textStyle = button1TextStyle
+        textStyle = buttonLTextStyle
     ),
     XL(
         cornerRadius = 28.dp,
         buttonHeight = 56.dp,
+//        PaddingValues(12.dp, 8.dp),
         PaddingValues(24.dp, 20.dp),
-        textStyle = button1TextStyle
+        textStyle = buttonXLTextStyle
     );
 }

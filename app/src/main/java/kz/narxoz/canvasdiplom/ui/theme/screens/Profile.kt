@@ -3,6 +3,7 @@ package kz.narxoz.canvasdiplom.ui.theme.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -16,8 +17,10 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import kz.narxoz.canvasdiplom.R
-import kz.narxoz.canvasdiplom.TasksViewModel
+import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.models.User
 import kz.narxoz.canvasdiplom.models.UserRole
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
@@ -29,23 +32,25 @@ import kz.narxoz.canvasdiplom.ui.theme.components.BaseTopBar
 @Composable
 fun ProfileScreen(
     modifier: Modifier,
+    navController: NavController,
     user: User,
     viewModel: TasksViewModel
 ) {
 
     Column(
+        modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         BaseTopBar(
             modifier = modifier
                 .background(color = colorResource(id = R.color.red)),
+            navController = navController,
             title = "Profile",
         )
 
         Header(user, modifier)
         InfoBlock(user)
 
-        BaseBottomBar(viewModel = viewModel)
     }
 }
 
@@ -110,7 +115,8 @@ fun PreviewProfile() {
         ProfileScreen(
             modifier = Modifier,
             user = user,
-            viewModel = viewModel
+            viewModel = viewModel,
+            navController = rememberNavController()
         )
 
     }

@@ -14,26 +14,38 @@ import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
+import kz.narxoz.canvasdiplom.ui.theme.screens.AppNavigation
 import kz.narxoz.canvasdiplom.ui.theme.screens.CanvasApp
 
+//class MainActivity : ComponentActivity() {
+//    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        enableEdgeToEdge()
+//        setContent {
+//            CanvasDiplomTheme {
+//                Surface {
+//                    val windowSize = calculateWindowSizeClass(this)
+//                    val context = LocalContext.current
+//                    CanvasApp(
+//                        modifier = Modifier.fillMaxSize()
+////                        context = context,
+////                        windowSize = windowSize.widthSizeClass,
+//                    )
+//                }
+//            }
+//        }
+//    }
+//}
+
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            CanvasDiplomTheme {
-                Surface {
-                    val windowSize = calculateWindowSizeClass(this)
-                    val context = LocalContext.current
-                    CanvasApp(
-                        context = context,
-//                        windowSize = windowSize.widthSizeClass,
-                    )
-                }
-            }
+            AppNavigation()
         }
     }
 }

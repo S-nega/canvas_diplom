@@ -1,5 +1,6 @@
 package kz.narxoz.canvasdiplom.ui.theme.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,8 +17,10 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import kz.narxoz.canvasdiplom.R
-import kz.narxoz.canvasdiplom.TasksViewModel
+import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
 import kz.narxoz.canvasdiplom.models.Course
 import kz.narxoz.canvasdiplom.models.Task
@@ -31,26 +34,29 @@ import kz.narxoz.canvasdiplom.ui.theme.components.BaseTopBar
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TasksScreen(
-//    navController: NavController,
+    modifier: Modifier,
+    navController: NavController,
     user: User,
     course: Course
 ) {
     val viewModel: TasksViewModel = viewModel()
+//    val bottomNavController = rememberNavController()
 
     Column {
         val isAbleAdding = user.role == UserRole.TEACHER
         val isAbleGrade = user.role == UserRole.STUDENT
         BaseTopBar(
             modifier = Modifier,
+            navController = navController,
             course.title,
             previousScreen = viewModel.navigateToDetailPage(),
-            nextScreen = viewModel.navigateToAddPage()
+            nextScreen = viewModel.navigateToAddPage(),
         )
 
         val filteredTasks = course.tasks
-        TasksList(user = user, filteredTasks = filteredTasks, course = course)
+        TasksList(user = user, filteredTasks = filteredTasks, course = course, navController = navController)
 
-        BaseBottomBar(viewModel)
+//        BaseBottomBar(bottomNavController, viewModel, Modifier)
     }
 }
 
@@ -61,6 +67,7 @@ fun TasksList(
     filteredTasks: List<Task>,
     user: User,
     course: Course,
+    navController: NavController
 ) {
     LazyColumn(
         modifier = Modifier
@@ -72,6 +79,7 @@ fun TasksList(
                 user = user,
                 task = task,
                 course = course,
+                navController = navController,
                 onClick = { viewModel.navigateToDetailPage() }
             )
         }
@@ -83,7 +91,9 @@ fun TaskCard(
     user: User,
     task: Task,
     course: Course,
-    onClick: (Task) -> Unit
+    isInfoPanel: Boolean? = false,
+    navController: NavController,
+    onClick: () -> Unit
 ) {
     val grade = task.scores.find { it.studentId == user.id }?.grade
 
@@ -93,6 +103,9 @@ fun TaskCard(
             .padding(
                 bottom = dimensionResource(id = R.dimen.padding_small)
             )
+            .clickable {
+                navController.navigate(Screen.TaskDetails.createRoute(task.id))
+            }
 //            .clickable { onClick() }
     ) {
         Row(
@@ -106,26 +119,28 @@ fun TaskCard(
             ) {
                 Column {
                     Text(
-                        text = task.title,
+                        text = if (isInfoPanel == true) {course.title} else {task.title} ,
                         style = Typography.titleMedium
                     )
                     Text(
-                        text = task.description,
+                        text = if (isInfoPanel == true) {task.title} else {task.description},
                         style = Typography.bodyMedium
                     )
                 }
             }
 
-            Box(
-                modifier = Modifier
-                    .padding(top = 2.dp, end = 2.dp, bottom = 2.dp)
-                    .weight(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = grade.toString(),
-                    style = Typography.titleMedium
-                )
+            if (isInfoPanel == false) {
+                Box(
+                    modifier = Modifier
+                        .padding(top = 2.dp, end = 2.dp, bottom = 2.dp)
+                        .weight(1f),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = grade.toString(),
+                        style = Typography.titleMedium
+                    )
+                }
             }
         }
     }
@@ -182,8 +197,9 @@ fun TaskListPreview() {
         val filteredTasks = course.tasks
         val currentTask = filteredTasks[0]
         val viewModel: TasksViewModel = viewModel()
+        val navController = rememberNavController()
 
 //        TaskDetailsScreen(task = currentTask, user = user, course = course, viewModel = viewModel)
-        TasksScreen(user = user, course = course)
+        TasksScreen(Modifier, user = user, course = course, navController = navController)
     }
 }

@@ -1,4 +1,4 @@
-package kz.narxoz.canvasdiplom
+package kz.narxoz.canvasdiplom.viewModels
 
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
 import android.content.Context
@@ -69,6 +69,12 @@ class TasksViewModel @Inject constructor() : ViewModel() {
     fun navigateToDetailPage() {
         _uiState.update {
             it.copy(isShowingListPage = false)
+        }
+    }
+
+    fun navigateToProfileScreen(){
+        _uiState.update {
+            it.copy()
         }
     }
 }

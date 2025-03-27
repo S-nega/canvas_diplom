@@ -17,35 +17,41 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import kz.narxoz.canvasdiplom.R
-import kz.narxoz.canvasdiplom.TasksViewModel
+import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
 import kz.narxoz.canvasdiplom.models.Course
 import kz.narxoz.canvasdiplom.models.Task
 import kz.narxoz.canvasdiplom.models.User
 import kz.narxoz.canvasdiplom.models.UserRole
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
-import kz.narxoz.canvasdiplom.ui.theme.components.BaseBottomBar
 import kz.narxoz.canvasdiplom.ui.theme.components.BaseButton
 import kz.narxoz.canvasdiplom.ui.theme.components.BaseTopBar
 
 
 @Composable
 fun TaskDetailsScreen(
+    navController: NavController,
     viewModel: TasksViewModel,
     task: Task,
     user: User,
     course: Course,
 ) {
+//    val bottomNavController = rememberNavController()
+
     Column {
         BaseTopBar(
             modifier = Modifier,
+            navController = navController,
             task.title,
             task.scores.find { it.studentId == user.id }?.grade,
-            previousScreen = viewModel.navigateToListPage()
+//            previousScreen = {navController.popBackStack()} //viewModel.navigateToListPage(),
+//            onClick = { navController.popBackStack() }
         )
         CurrentTaskCard(task, user, course)
-        BaseBottomBar(viewModel)
+//        BaseBottomBar(bottomNavController, viewModel, Modifier)
     }
 }
 
@@ -156,8 +162,9 @@ fun TaskDetailsPreview() {
         val filteredTasks = course.tasks
         val currentTask = filteredTasks[0]
         val viewModel: TasksViewModel = viewModel()
+        val navController = rememberNavController()
 
-        TaskDetailsScreen(task = currentTask, user = user, course = course, viewModel = viewModel)
+        TaskDetailsScreen(navController = navController, task = currentTask, user = user, course = course, viewModel = viewModel)
 //        TasksScreen(user = user, course = course)
     }
 }

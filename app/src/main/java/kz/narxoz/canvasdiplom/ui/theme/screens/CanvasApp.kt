@@ -1,80 +1,182 @@
 package kz.narxoz.canvasdiplom.ui.theme.screens
 
-import android.content.Context
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import kz.narxoz.canvasdiplom.R
-import kz.narxoz.canvasdiplom.TasksViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
+import kz.narxoz.canvasdiplom.models.Course
+import kz.narxoz.canvasdiplom.models.User
+import kz.narxoz.canvasdiplom.models.UserRole
+import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
-import kz.narxoz.canvasdiplom.ui.theme.Typography
-import java.util.Date
+import kz.narxoz.canvasdiplom.ui.theme.components.BaseBottomBar
+import kz.narxoz.canvasdiplom.ui.theme.components.BottomNavigationBar
 
 @Composable
-fun CanvasApp(
+fun CanvasApp(//mainScreen
 //    windowSize: WindowWidthSizeClass,
     modifier: Modifier = Modifier,
-    context: Context
+//    context: Context,
+    navController: NavController
 ){
-    val context = LocalContext.current
+//    val context = LocalContext.current
 
     val viewModel: TasksViewModel = viewModel()
 //    val uiState by viewModel.uiState.collectAsState()
+    val bottomNavController = rememberNavController()
 
-    Scaffold { innerPadding ->
-        AuthorizationScreen(
+    val user = User(
+        id = "S1",
+        name = "John",
+        surname = "Doe",
+        contact = "+1234567890",
+        email = "john.doe@example.com",
+        login = "jdoe",
+        password = "securepassword",
+        role = UserRole.STUDENT,
+        courses = mutableListOf()
+    )
+    val course = Course(
+        id = 1,
+        title = "Android Development",
+        teacher = User(
+            id = "t1",
+            name = "John",
+            surname = "Doe",
+            contact = "",
+            email = "",
+            login = "",
+            password = "",
+            role = UserRole.TEACHER,
+            courses = mutableListOf()
+        ),
+        code = "ANDROID101",
+        credits = 6,
+        hoursPerWeek = 3,
+        courseTable = mutableListOf(),
+        tasks = LocalTasksDataProvider.staticTasksData,
+        students = mutableListOf()
+    )
+
+
+    Scaffold (
+        topBar = {},
+        bottomBar = {
+            BaseBottomBar(bottomNavController, viewModel, modifier)
+//            BottomNavigationBar(bottomNavController)
+        }
+    ) { innerPadding ->
+        ProfileScreen(
             modifier = Modifier
-                .fillMaxSize()
+//                .fillMaxSize()
                 .padding(innerPadding),
-            viewModel = viewModel
-        )
+            user = user,
+            navController = navController,
+            viewModel = viewModel)
+
+//        NavHost(
+//            navController = bottomNavController,
+//            startDestination = Screen.Profile.route,
+//            modifier = Modifier.padding(innerPadding)
+//        ) {
+//            composable(Screen.Profile.route) { ProfileScreen(modifier, user = user, viewModel) }
+//            composable(Screen.Calendar.route) { CalendarScreen(modifier) }
+//            composable(Screen.Courses.route) { CoursesScreen(modifier, user.courses) }
+//            composable(Screen.InfoPanel.route) { InfoPanelScreen(modifier, user, course.tasks) }
+//        }
+
+//        AuthorizationScreen(
+//            modifier = Modifier
+//                .padding(innerPadding),
+//            viewModel = viewModel
+//        )
     }
 }
 
-
-
-
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
-@Preview(showBackground = true)
 @Composable
-fun CanvasAppBottomBarPreview() {
-    CanvasDiplomTheme {
-//        val windowSize = calculateWindowSizeClass(this)
-        val context = LocalContext.current
-        CanvasApp(
-            context = context,
-//            windowSize = windowSize.widthSizeClass,
-        )
+fun MainScreen() {
+    val navController = rememberNavController()
+    val viewModel: TasksViewModel = viewModel()
 
+    val user = User(
+        id = "S1",
+        name = "John",
+        surname = "Doe",
+        contact = "+1234567890",
+        email = "john.doe@example.com",
+        login = "jdoe",
+        password = "securepassword",
+        role = UserRole.STUDENT,
+        courses = mutableListOf()
+    )
+    val course = Course(
+        id = 1,
+        title = "Android Development",
+        teacher = User(
+            id = "t1",
+            name = "John",
+            surname = "Doe",
+            contact = "",
+            email = "",
+            login = "",
+            password = "",
+            role = UserRole.TEACHER,
+            courses = mutableListOf()
+        ),
+        code = "ANDROID101",
+        credits = 6,
+        hoursPerWeek = 3,
+        courseTable = mutableListOf(),
+        tasks = LocalTasksDataProvider.staticTasksData,
+        students = mutableListOf()
+    )
+
+    Scaffold(
+        bottomBar = { BottomNavigationBar(navController) }
+    ) { padding ->
+        NavHost(
+            navController = navController,
+            startDestination = Screen.Profile.route,
+            modifier = Modifier.padding(padding)
+        ) {
+            composable(Screen.Profile.route) { ProfileScreen(Modifier, user = user, navController = navController, viewModel = viewModel) }
+            composable(Screen.InfoPanel.route) { InfoPanelScreen(Modifier, user, course.tasks, navController = navController) }
+            composable(Screen.Calendar.route) { CalendarScreen(Modifier, navController) }
+            composable(Screen.Courses.route) { CoursesScreen(Modifier, user.courses) }
+            composable(Screen.Tasks.route) { TasksScreen(Modifier, navController, user, course) }
+            composable(Screen.TaskDetails.route) { backStackEntry ->
+                val taskId = backStackEntry.arguments?.getString("taskId")?.toIntOrNull()
+                if (taskId != null) {
+                    TaskDetailsScreen(navController, viewModel, course.tasks[taskId], user, course)
+                }
+            }
+        }
     }
 }
+
+
+
+//@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+//@Preview(showBackground = true)
+//@Composable
+//fun CanvasAppPreview() {
+//    CanvasDiplomTheme {
+////        val windowSize = calculateWindowSizeClass(this)
+//        val context = LocalContext.current
+//        CanvasApp(
+//            modifier = Modifier,
+////            context = context,
+////            windowSize = windowSize.widthSizeClass,
+//        )
+//
+//    }
+//}

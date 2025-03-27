@@ -11,19 +11,12 @@ import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kz.narxoz.canvasdiplom.R
 
 @SuppressLint("SuspiciousIndentation")
@@ -41,7 +34,7 @@ fun BaseButton(
     isRounded: Boolean = false,
     size: ButtonSizes? = null,
     style: ButtonStyles? = null,
-    onClick: (() -> Unit)? = null
+    onClick: (() -> Unit?)? = null,
 ) {
 
     val buttonParameters = GetButtonParameters(
@@ -77,43 +70,43 @@ fun BaseButton(
     }
 }
 
-@Composable
-fun BaseDebouncedButton(
-    modifier: Modifier = Modifier,
-    backgroundColor: ButtonColors = ButtonDefaults.buttonColors(
-        containerColor = colorResource(id = R.color.red),
-        contentColor = colorResource(id = R.color.gray_75)
-    ),
-    buttonText: String = "",
-    enabled: Boolean = true,
-    isRounded: Boolean = false,
-    size: ButtonSizes? = null,
-    style: ButtonStyles? = null,
-    onClick: (() -> Unit)? = null
-) {
-    val coroutineScope = rememberCoroutineScope()
-    var isClickable by remember { mutableStateOf(true) }
-
-    BaseButton(
-        modifier = modifier,
-        backgroundColor = backgroundColor,
-        buttonText = buttonText,
-        enabled = enabled,
-        size = size,
-        style = style,
-        isRounded = isRounded,
-        onClick = {
-            if (isClickable) {
-                onClick?.invoke()
-                isClickable = false
-                coroutineScope.launch {
-                    delay(0)
-                    isClickable = true
-                }
-            }
-        }
-    )
-}
+//@Composable
+//fun BaseDebouncedButton(
+//    modifier: Modifier = Modifier,
+//    backgroundColor: ButtonColors = ButtonDefaults.buttonColors(
+//        containerColor = colorResource(id = R.color.red),
+//        contentColor = colorResource(id = R.color.gray_75)
+//    ),
+//    buttonText: String = "",
+//    enabled: Boolean = true,
+//    isRounded: Boolean = false,
+//    size: ButtonSizes? = null,
+//    style: ButtonStyles? = null,
+//    onClick: (() -> Unit)? = null
+//) {
+//    val coroutineScope = rememberCoroutineScope()
+//    var isClickable by remember { mutableStateOf(true) }
+//
+//    BaseButton(
+//        modifier = modifier,
+//        backgroundColor = backgroundColor,
+//        buttonText = buttonText,
+//        enabled = enabled,
+//        size = size,
+//        style = style,
+//        isRounded = isRounded,
+//        onClick = {
+//            if (isClickable) {
+//                onClick?.invoke()
+//                isClickable = false
+//                coroutineScope.launch {
+//                    delay(0)
+//                    isClickable = true
+//                }
+//            }
+//        }
+//    )
+//}
 
 @Composable
 @Preview(showBackground = true)
@@ -131,8 +124,8 @@ fun BaseButtonPreview() {
             buttonText = "Base Button"
         )
 
-        BaseDebouncedButton(
-            buttonText = "Debounced Button"
-        )
+//        BaseDebouncedButton(
+//            buttonText = "Debounced Button"
+//        )
     }
 }

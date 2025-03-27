@@ -19,9 +19,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kz.narxoz.canvasdiplom.R
-import kz.narxoz.canvasdiplom.TasksViewModel
+import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
 import kz.narxoz.canvasdiplom.ui.theme.components.BaseButton
+import kz.narxoz.canvasdiplom.ui.theme.components.ButtonSizes
 import kz.narxoz.canvasdiplom.ui.theme.components.ButtonStyles
 import kz.narxoz.canvasdiplom.ui.theme.components.InputField
 
@@ -29,7 +30,8 @@ import kz.narxoz.canvasdiplom.ui.theme.components.InputField
 @Composable
 fun AuthorizationScreen(
     modifier: Modifier,
-    viewModel: TasksViewModel
+    viewModel: TasksViewModel,
+//    onAuthorized: () -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -67,6 +69,7 @@ fun AuthorizationScreen(
             }
             BaseButton(
                 modifier = Modifier.fillMaxWidth(),
+                size = ButtonSizes.L,
                 onClick = { viewModel.navigateToListPage() },
                 buttonText = "Enter"
             )
@@ -88,7 +91,11 @@ fun PreviewAuthorization() {
 
         AuthorizationScreen(
             modifier = Modifier,
-            viewModel = viewModel
+            viewModel = viewModel,
+//            onAuthorized = {
+//                navController.navigate(Screen.Main.route) {
+//                    popUpTo(Screen.Auth.route) { inclusive = true }
+//            }
         )
 
     }
