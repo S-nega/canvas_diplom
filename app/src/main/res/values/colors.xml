@@ -222,4 +222,10 @@
     <color name="alert_text_color">#DA454E</color>
     <color name="meza_0_color">#80808080</color>
     <color name="papera_80_color">#CCFFFFFF</color>
+
+
+    <color name="pink_exam">#CCF389BA</color>
+    <color name="green_reg">#CC8CF6B0</color>
+    <color name="yellow_holiday">#CCF6E380</color>
+    <color name="blue_control">#CC82B5F4</color>
 </resources>

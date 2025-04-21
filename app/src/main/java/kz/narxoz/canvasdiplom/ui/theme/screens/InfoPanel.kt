@@ -10,19 +10,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kz.narxoz.canvasdiplom.R
+import kz.narxoz.canvasdiplom.data.LocalCoursesDataProvider
 import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
-import kz.narxoz.canvasdiplom.models.Course
 import kz.narxoz.canvasdiplom.models.Task
 import kz.narxoz.canvasdiplom.models.User
 import kz.narxoz.canvasdiplom.models.UserRole
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
 import kz.narxoz.canvasdiplom.ui.theme.components.BaseTopBar
+import kz.narxoz.canvasdiplom.ui.theme.components.ListItem
 import java.time.LocalDateTime
 
 
@@ -38,11 +38,11 @@ fun InfoPanelScreen(
 
     Column (
     ){
-        BaseTopBar(
-            modifier = Modifier,
-            navController = navController,
-            title = "Info Panel"
-        )
+//        BaseTopBar(
+//            modifier = Modifier,
+//            navController = navController,
+//            title = "Info Panel"
+//        )
         InfoPanelDaysList(
             modifier = Modifier,
             user = user,
@@ -122,16 +122,26 @@ fun InfoPanelTasksListInDay(
         )
         LazyColumn {
             items(sortedTasksList) { task ->
-                TaskCard(
+                ListItem(
                     user = user,
-                    task = task,
-                    course = task.course,
-                    isInfoPanel = true,
+                    title = LocalCoursesDataProvider.getCourseByID(task.courseID).title.toString(),
+                    description = task.title,
+//                    grade = 0,
                     navController = navController,
-                    onClick = {
-                        navController.navigate(Screen.TaskDetails.createRoute(task.id))
-                    }
-                )
+                    route = Screen.TaskDetails.createRoute(task.id)
+                ) {
+
+                }
+//                TaskCard(
+//                    user = user,
+//                    task = task,
+//                    course = LocalCoursesDataProvider.getStaticCoursesData()[0],//task.courseID,
+//                    isInfoPanel = true,
+//                    navController = navController,
+//                    onClick = {
+//                        navController.navigate(Screen.TaskDetails.createRoute(task.id))
+//                    }
+//                )
             }
         }
     }
@@ -155,29 +165,30 @@ fun InfoPanelPreview() {
             courses = mutableListOf()
         )
 
-        val course = Course(
-            id = 1,
-            title = "Android Development",
-            teacher = User(
-                id = "t1",
-                name = "John",
-                surname = "Doe",
-                contact = "",
-                email = "",
-                login = "",
-                password = "",
-                role = UserRole.TEACHER,
-                courses = mutableListOf()
-            ),
-            code = "ANDROID101",
-            credits = 6,
-            hoursPerWeek = 3,
-            courseTable = mutableListOf(),
-            tasks = LocalTasksDataProvider.staticTasksData,
-            students = mutableListOf()
-        )
+//        val course = Course(
+//            id = 1,
+//            title = "Android Development",
+//            teacher = User(
+//                id = "t1",
+//                name = "John",
+//                surname = "Doe",
+//                contact = "",
+//                email = "",
+//                login = "",
+//                password = "",
+//                role = UserRole.TEACHER,
+//                courses = mutableListOf()
+//            ),
+//            code = "ANDROID101",
+//            credits = 6,
+//            hoursPerWeek = 3,
+//            courseTable = mutableListOf(),
+//            tasks = LocalTasksDataProvider.staticTasksData,
+//            students = mutableListOf()
+//        )
 
-        val filteredTasks = course.tasks
+        val course = LocalCoursesDataProvider.getStaticCoursesData()[0]
+        val filteredTasks = LocalTasksDataProvider.staticTasksData.filter { task: Task -> task.courseID == course.id }
         val currentTask = filteredTasks[0]
         val viewModel: TasksViewModel = viewModel()
         val navController = rememberNavController()

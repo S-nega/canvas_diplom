@@ -18,8 +18,8 @@ object LocalUsersDataProvider {
             courses = LocalCoursesDataProvider.getStaticCoursesData()
         ),
         User(
-            id = "S2",
-            name = "Snezhana",
+            id = "T2",
+            name = "TEACHER",
             surname = "Golovko",
             contact = "+77077446255",
             email = "snezhana.golovko@narxoz.kz",
@@ -29,7 +29,7 @@ object LocalUsersDataProvider {
             courses = LocalCoursesDataProvider.getStaticCoursesData()
         ),
         User(
-            id = "S3",
+            id = "M3",
             name = "Snezhana",
             surname = "Golovko",
             contact = "+77077446255",
@@ -41,6 +41,9 @@ object LocalUsersDataProvider {
         )
     )
 
-    fun getStaticUsersData(): List<User> = LocalUsersDataProvider.staticUsersData
+    fun getStaticUsersData(): List<User> = staticUsersData
+
+    fun getUserByID(userId: String): User =
+        staticUsersData.find { user: User -> user.id == userId }!!
 
 }

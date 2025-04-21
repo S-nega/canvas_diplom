@@ -1,25 +1,19 @@
 package kz.narxoz.canvasdiplom.ui.theme.screens
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kz.narxoz.canvasdiplom.R
+import kz.narxoz.canvasdiplom.data.LocalCoursesDataProvider
 import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
 import kz.narxoz.canvasdiplom.models.Course
@@ -27,9 +21,8 @@ import kz.narxoz.canvasdiplom.models.Task
 import kz.narxoz.canvasdiplom.models.User
 import kz.narxoz.canvasdiplom.models.UserRole
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
-import kz.narxoz.canvasdiplom.ui.theme.Typography
-import kz.narxoz.canvasdiplom.ui.theme.components.BaseBottomBar
 import kz.narxoz.canvasdiplom.ui.theme.components.BaseTopBar
+import kz.narxoz.canvasdiplom.ui.theme.components.ListItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -40,23 +33,20 @@ fun TasksScreen(
     course: Course
 ) {
     val viewModel: TasksViewModel = viewModel()
-//    val bottomNavController = rememberNavController()
 
     Column {
         val isAbleAdding = user.role == UserRole.TEACHER
         val isAbleGrade = user.role == UserRole.STUDENT
-        BaseTopBar(
-            modifier = Modifier,
-            navController = navController,
-            course.title,
-            previousScreen = viewModel.navigateToDetailPage(),
-            nextScreen = viewModel.navigateToAddPage(),
-        )
+//        BaseTopBar(
+//            modifier = Modifier,
+//            navController = navController,
+//            course.title,
+//            previousScreen = viewModel.navigateToDetailPage(),
+//            nextScreen = viewModel.navigateToAddPage(),
+//        )
 
-        val filteredTasks = course.tasks
+        val filteredTasks = LocalTasksDataProvider.staticTasksData.filter { task: Task -> task.courseID == course.id }
         TasksList(user = user, filteredTasks = filteredTasks, course = course, navController = navController)
-
-//        BaseBottomBar(bottomNavController, viewModel, Modifier)
     }
 }
 
@@ -75,83 +65,17 @@ fun TasksList(
             .padding(dimensionResource(id = R.dimen.padding_medium))
     ) {
         items(filteredTasks) { task ->
-            TaskCard(
+            ListItem(
                 user = user,
-                task = task,
-                course = course,
+                title = task.title,
+                description = task.description,
+                grade = task.scores.find { it.studentId == user.id }?.grade,
                 navController = navController,
+                route = Screen.TaskDetails.createRoute(task.id),
                 onClick = { viewModel.navigateToDetailPage() }
             )
         }
     }
-}
-
-@Composable
-fun TaskCard(
-    user: User,
-    task: Task,
-    course: Course,
-    isInfoPanel: Boolean? = false,
-    navController: NavController,
-    onClick: () -> Unit
-) {
-    val grade = task.scores.find { it.studentId == user.id }?.grade
-
-
-    Card(
-        modifier = Modifier
-            .padding(
-                bottom = dimensionResource(id = R.dimen.padding_small)
-            )
-            .clickable {
-                navController.navigate(Screen.TaskDetails.createRoute(task.id))
-            }
-//            .clickable { onClick() }
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(dimensionResource(id = R.dimen.padding_medium)),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-
-            Box(
-                modifier = Modifier.weight(3f)
-            ) {
-                Column {
-                    Text(
-                        text = if (isInfoPanel == true) {course.title} else {task.title} ,
-                        style = Typography.titleMedium
-                    )
-                    Text(
-                        text = if (isInfoPanel == true) {task.title} else {task.description},
-                        style = Typography.bodyMedium
-                    )
-                }
-            }
-
-            if (isInfoPanel == false) {
-                Box(
-                    modifier = Modifier
-                        .padding(top = 2.dp, end = 2.dp, bottom = 2.dp)
-                        .weight(1f),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = grade.toString(),
-                        style = Typography.titleMedium
-                    )
-                }
-            }
-        }
-    }
-}
-
-
-@Composable
-fun CreateTaskScreen(
-    user: User,
-) {
-
 }
 
 
@@ -172,34 +96,10 @@ fun TaskListPreview() {
             courses = mutableListOf()
         )
 
-        val course = Course(
-            id = 1,
-            title = "Android Development",
-            teacher = User(
-                id = "t1",
-                name = "John",
-                surname = "Doe",
-                contact = "",
-                email = "",
-                login = "",
-                password = "",
-                role = UserRole.TEACHER,
-                courses = mutableListOf()
-            ),
-            code = "ANDROID101",
-            credits = 6,
-            hoursPerWeek = 3,
-            courseTable = mutableListOf(),
-            tasks = LocalTasksDataProvider.staticTasksData,
-            students = mutableListOf()
-        )
-
-        val filteredTasks = course.tasks
-        val currentTask = filteredTasks[0]
+        val course = LocalCoursesDataProvider.getStaticCoursesData()[0]
         val viewModel: TasksViewModel = viewModel()
         val navController = rememberNavController()
 
-//        TaskDetailsScreen(task = currentTask, user = user, course = course, viewModel = viewModel)
         TasksScreen(Modifier, user = user, course = course, navController = navController)
     }
 }

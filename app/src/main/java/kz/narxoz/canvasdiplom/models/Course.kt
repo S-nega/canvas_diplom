@@ -6,13 +6,15 @@ import java.util.Date
 data class Course (
     val id: Int,
     val title: String,
-    val teacher: User,
+    val teacherID: String,
+//    val teacher: User,
     val code: String,
     val credits: Int,
     val hoursPerWeek: Int,
 
-    val students: List<User>,
-    val tasks: List<Task>,
+    val studentsID: List<String>, //??
+//    val students: List<User>,
+//    val tasks: List<Task>,
 
     val courseTable: List<CourseTable>
 

@@ -3,54 +3,61 @@ package kz.narxoz.canvasdiplom.ui.theme.screens
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import kz.narxoz.canvasdiplom.R
+import kz.narxoz.canvasdiplom.data.LocalCoursesDataProvider
+import kz.narxoz.canvasdiplom.data.LocalUsersDataProvider
 import kz.narxoz.canvasdiplom.models.Course
+import kz.narxoz.canvasdiplom.models.User
+import kz.narxoz.canvasdiplom.models.UserRole
+import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
+import kz.narxoz.canvasdiplom.ui.theme.components.ListItem
+import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 
 @Composable
 fun CoursesScreen(
     modifier: Modifier,
+    user: User,
     courses: List<Course>,
+    navController: NavController,
 ){
+//    BaseTopBar(modifier = modifier, navController = navController, title = "Courses")
 
-    LazyColumn(modifier = modifier){
-        items(courses, key = {course -> course.id}) { course ->
-            CourseCard(
-                course = course
-            )
-        }
-    }
-}
+    LazyColumn(
+        modifier = modifier
+            .fillMaxWidth()
+    ){
+        items(courses){course ->
+            //, key = {course -> course.id}) { course ->
+            ListItem(
+                user = user,
+                title = course.title,
+                description = LocalUsersDataProvider.getUserByID(user.id).name + " "
+                        + LocalUsersDataProvider.getUserByID(user.id).surname,
+                //+ "/n" + course.credits + " " + course.hoursPerWeek,
+                navController = navController,
+                route = Screen.Tasks.route
+            ) {
 
-@Composable
-fun CourseCard(
-    course: Course
-) {
-    Box {
-        Row {
-            Column {
-                Text(text = course.title)
-                Text(text = course.teacher.name + " " + course.teacher.surname)
             }
-//            Text(text = course.tasks)
         }
     }
 }
 
-@Composable
-fun CourseRegistrationScreen(
-    modifier: Modifier
-){
-
-}
 
 @Composable
 fun RegisteredCoursesScreen(
@@ -108,5 +115,30 @@ fun CoursesBottomBar(
                 contentDescription = "Courses"
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun CoursesListPreview() {
+    CanvasDiplomTheme {
+
+        val user = User(
+            id = "S1",
+            name = "John",
+            surname = "Doe",
+            contact = "+1234567890",
+            email = "john.doe@example.com",
+            login = "jdoe",
+            password = "securepassword",
+            role = UserRole.STUDENT,
+            courses = mutableListOf()
+        )
+
+        val viewModel: TasksViewModel = viewModel()
+        val navController = rememberNavController()
+        val courses = LocalCoursesDataProvider.getStaticCoursesData()
+
+        CoursesScreen(modifier = Modifier, courses = courses, user = user, navController = navController)
     }
 }

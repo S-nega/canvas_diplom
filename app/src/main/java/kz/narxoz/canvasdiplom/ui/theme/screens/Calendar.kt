@@ -1,10 +1,15 @@
 package kz.narxoz.canvasdiplom.ui.theme.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -17,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,11 +39,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kz.narxoz.canvasdiplom.R
+import kz.narxoz.canvasdiplom.models.Events
 import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.models.Hint
+import kz.narxoz.canvasdiplom.models.TimeSlot
+import kz.narxoz.canvasdiplom.models.hintsList
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
 import kz.narxoz.canvasdiplom.ui.theme.Typography
-import kz.narxoz.canvasdiplom.ui.theme.components.BaseBottomBar
 import kz.narxoz.canvasdiplom.ui.theme.components.BaseTopBar
 import java.time.LocalDate
 import java.time.YearMonth
@@ -58,11 +67,25 @@ fun CalendarScreen(
 //
 //    val daysList = List(dayOfWeek - 1) { null } + (1..daysInMonth).toList()
 
-    Column {
-        BaseTopBar(modifier = modifier, navController = navController, title = "Calendar")
+    val eventsList = mutableListOf<Events>(
+        Events(
+            timeSlot = TimeSlot.SLOT_1,
+            title = " Course ",
+            room = "123"
+        ),
+        Events(
+            timeSlot = TimeSlot.SLOT_2,
+            title = " Course1 ",
+            room = "321"
+        )
+    )
 
+    Column {
         CalendarCard(yearMonth)
-        EventsCard()
+
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_medium)))
+
+        EventsCard(eventsList = eventsList)
 
 //        BaseBottomBar(bottomNavController, viewModel, modifier)
     }
@@ -85,7 +108,8 @@ fun CalendarCard(
             Divider()
             CalendarGrid(yearMonth)
             Divider()
-//            CalendarHints(hintsList = hintsList)
+            CalendarHints(hintsList = hintsList)
+
         }
     }
 }
@@ -172,20 +196,27 @@ fun CalendarHints(
 ){
     LazyColumn {
         items(hintsList) {hint ->
-            HintItem(color = hint.color, hint = hint.text )
+            HintItem(color = hint.color, hint = hint.label )
         }
     }
 }
 
 @Composable
 fun HintItem(
-    color: Color,
+    color: Int,
     hint: String
 ){
-    Row(){
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(dimensionResource(id = R.dimen.padding_small))
+    ){
         Card (
             modifier = Modifier
-                .background(color)
+                .padding(end = dimensionResource(id = R.dimen.padding_small))
+                .width(dimensionResource(id = R.dimen.padding_large))
+                .height(dimensionResource(id = R.dimen.padding_large)),
+            colors = CardDefaults.cardColors(colorResource(id = color))
         ) {}
         Text(text = hint)
     }
@@ -193,9 +224,36 @@ fun HintItem(
 
 @Composable
 fun EventsCard(
-
+    eventsList: List<Events>
 ){
-
+    Card (
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(id = R.dimen.padding_medium))
+        ){
+            Text(text = "Events")
+            Divider()
+            LazyColumn {
+                items(eventsList) { event ->
+                    Row (
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = dimensionResource(id = R.dimen.padding_small)),
+                    ) {
+                        Text(text = event.timeSlot.toString(),
+                            modifier = Modifier.weight(2f))
+                        Text(text = event.title,
+                            modifier = Modifier.weight(2f))
+                        Text(text = event.room,
+                            modifier = Modifier.weight(1f))
+                    }
+                }
+            }
+        }
+    }
 }
 
 @Preview(showBackground = true)

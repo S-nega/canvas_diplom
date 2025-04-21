@@ -11,7 +11,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import kz.narxoz.canvasdiplom.data.LocalCoursesDataProvider
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
 import kz.narxoz.canvasdiplom.models.Course
 import kz.narxoz.canvasdiplom.models.User
@@ -19,6 +21,7 @@ import kz.narxoz.canvasdiplom.models.UserRole
 import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
 import kz.narxoz.canvasdiplom.ui.theme.components.BaseBottomBar
+import kz.narxoz.canvasdiplom.ui.theme.components.BaseTopBar
 import kz.narxoz.canvasdiplom.ui.theme.components.BottomNavigationBar
 
 @Composable
@@ -48,28 +51,31 @@ fun CanvasApp(//mainScreen
     val course = Course(
         id = 1,
         title = "Android Development",
-        teacher = User(
-            id = "t1",
-            name = "John",
-            surname = "Doe",
-            contact = "",
-            email = "",
-            login = "",
-            password = "",
-            role = UserRole.TEACHER,
-            courses = mutableListOf()
-        ),
+        teacherID = "T2",
+//        = User(
+//            id = "t1",
+//            name = "John",
+//            surname = "Doe",
+//            contact = "",
+//            email = "",
+//            login = "",
+//            password = "",
+//            role = UserRole.TEACHER,
+//            courses = mutableListOf()
+//        ),
         code = "ANDROID101",
         credits = 6,
         hoursPerWeek = 3,
         courseTable = mutableListOf(),
-        tasks = LocalTasksDataProvider.staticTasksData,
-        students = mutableListOf()
+//        tasks = LocalTasksDataProvider.staticTasksData,
+        studentsID = mutableListOf("s1", "s2")
     )
 
 
     Scaffold (
-        topBar = {},
+        topBar = {
+//                 BaseTopBar(modifier = modifier, navController = navController, title = )
+        },
         bottomBar = {
             BaseBottomBar(bottomNavController, viewModel, modifier)
 //            BottomNavigationBar(bottomNavController)
@@ -118,29 +124,21 @@ fun MainScreen() {
         role = UserRole.STUDENT,
         courses = mutableListOf()
     )
-    val course = Course(
-        id = 1,
-        title = "Android Development",
-        teacher = User(
-            id = "t1",
-            name = "John",
-            surname = "Doe",
-            contact = "",
-            email = "",
-            login = "",
-            password = "",
-            role = UserRole.TEACHER,
-            courses = mutableListOf()
-        ),
-        code = "ANDROID101",
-        credits = 6,
-        hoursPerWeek = 3,
-        courseTable = mutableListOf(),
-        tasks = LocalTasksDataProvider.staticTasksData,
-        students = mutableListOf()
-    )
+    val course = LocalCoursesDataProvider.getStaticCoursesData()[0]
 
     Scaffold(
+        topBar = {
+            val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+            val title = when (currentRoute) {
+                Screen.Profile.route -> "Profile"
+                Screen.Calendar.route -> "Calendar"
+                Screen.Courses.route -> "Courses"
+                Screen.InfoPanel.route -> "Info Panel"
+                else -> "App"
+            }
+
+            BaseTopBar(title = title, navController = navController)
+        },
         bottomBar = { BottomNavigationBar(navController) }
     ) { padding ->
         NavHost(
@@ -149,16 +147,16 @@ fun MainScreen() {
             modifier = Modifier.padding(padding)
         ) {
             composable(Screen.Profile.route) { ProfileScreen(Modifier, user = user, navController = navController, viewModel = viewModel) }
-            composable(Screen.InfoPanel.route) { InfoPanelScreen(Modifier, user, course.tasks, navController = navController) }
+//            composable(Screen.InfoPanel.route) { InfoPanelScreen(Modifier, user, course.tasks, navController = navController) }
             composable(Screen.Calendar.route) { CalendarScreen(Modifier, navController) }
-            composable(Screen.Courses.route) { CoursesScreen(Modifier, user.courses) }
+//            composable(Screen.Courses.route) { CoursesScreen(Modifier, user.courses, navController) }
             composable(Screen.Tasks.route) { TasksScreen(Modifier, navController, user, course) }
-            composable(Screen.TaskDetails.route) { backStackEntry ->
-                val taskId = backStackEntry.arguments?.getString("taskId")?.toIntOrNull()
-                if (taskId != null) {
-                    TaskDetailsScreen(navController, viewModel, course.tasks[taskId], user, course)
-                }
-            }
+//            composable(Screen.TaskDetails.route) { backStackEntry ->
+//                val taskId = backStackEntry.arguments?.getString("taskId")?.toIntOrNull()
+//                if (taskId != null) {
+//                    TaskDetailsScreen(navController, viewModel, course.tasks[taskId], user, course)
+//                }
+//            }
         }
     }
 }

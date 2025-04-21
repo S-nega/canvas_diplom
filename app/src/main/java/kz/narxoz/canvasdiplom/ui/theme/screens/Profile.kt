@@ -41,12 +41,12 @@ fun ProfileScreen(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        BaseTopBar(
-            modifier = modifier
-                .background(color = colorResource(id = R.color.red)),
-            navController = navController,
-            title = "Profile",
-        )
+//        BaseTopBar(
+//            modifier = modifier
+//                .background(color = colorResource(id = R.color.red)),
+//            navController = navController,
+//            title = "Profile",
+//        )
 
         Header(user, modifier)
         InfoBlock(user)

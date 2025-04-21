@@ -13,8 +13,8 @@ data class Task(
     val createdAt: LocalDateTime, // teacher created task
     val submittedAt: LocalDateTime, // passedAt // student passed task
 
-    val course: Course,
-    val teacher: User,
+    val courseID: Int,
+    val teacherID: String,
 
     val scores: List<Scores>,
 )

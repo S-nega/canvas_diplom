@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -36,11 +37,30 @@ import kz.narxoz.canvasdiplom.ui.theme.Typography
 import kz.narxoz.canvasdiplom.ui.theme.screens.Screen
 import java.util.Date
 
+//
+//@Composable
+//fun BaseTopBar(title: String, navController: NavController) {
+//    TopAppBar(
+//        title = { Text(text = title) },
+//        navigationIcon = {
+//            if (navController.previousBackStackEntry != null) {
+//                IconButton(onClick = { navController.popBackStack() }) {
+//                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
+//                }
+//            }
+//        },
+//        actions = {
+//            IconButton(onClick = { /* TODO: Add action */ }) {
+//                Icon(imageVector = Icons.Default.MoreVert, contentDescription = "More")
+//            }
+//        }
+//    )
+//}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BaseTopBar( // change the way of calculating data
-    modifier: Modifier,
+//    modifier: Modifier,
     navController: NavController,
     title: String,
     grade: Double? = null,
@@ -55,7 +75,7 @@ fun BaseTopBar( // change the way of calculating data
     val canPopBack = navController.previousBackStackEntry != null
 
     TopAppBar(
-        modifier = modifier,
+//        modifier = modifier,
         title = { Text(text = title, style = Typography.titleLarge) },
         navigationIcon = {
             if (canPopBack) {
