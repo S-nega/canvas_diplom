@@ -1,4 +1,4 @@
-package kz.narxoz.canvasdiplom.ui.theme.screens
+package kz.narxoz.canvasdiplom.ui.theme.screens.tasks
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -16,13 +16,14 @@ import kz.narxoz.canvasdiplom.R
 import kz.narxoz.canvasdiplom.data.LocalCoursesDataProvider
 import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
+import kz.narxoz.canvasdiplom.data.LocalUsersDataProvider
 import kz.narxoz.canvasdiplom.models.Course
 import kz.narxoz.canvasdiplom.models.Task
 import kz.narxoz.canvasdiplom.models.User
 import kz.narxoz.canvasdiplom.models.UserRole
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
-import kz.narxoz.canvasdiplom.ui.theme.components.BaseTopBar
 import kz.narxoz.canvasdiplom.ui.theme.components.ListItem
+import kz.narxoz.canvasdiplom.ui.theme.screens.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,7 +46,7 @@ fun TasksScreen(
 //            nextScreen = viewModel.navigateToAddPage(),
 //        )
 
-        val filteredTasks = LocalTasksDataProvider.staticTasksData.filter { task: Task -> task.courseID == course.id }
+        val filteredTasks = LocalTasksDataProvider.getStaticTasksData().filter { task: Task -> task.courseID == course.id }
         TasksList(user = user, filteredTasks = filteredTasks, course = course, navController = navController)
     }
 }
@@ -69,10 +70,10 @@ fun TasksList(
                 user = user,
                 title = task.title,
                 description = task.description,
-                grade = task.scores.find { it.studentId == user.id }?.grade,
+//                grade = task.scores.find { it.studentId == user.id }?.grade,
                 navController = navController,
                 route = Screen.TaskDetails.createRoute(task.id),
-                onClick = { viewModel.navigateToDetailPage() }
+                onClick = { viewModel.navigateToDetailPage(user, task) }
             )
         }
     }
@@ -84,17 +85,18 @@ fun TasksList(
 fun TaskListPreview() {
     CanvasDiplomTheme {
 
-        val user = User(
-            id = "S1",
-            name = "John",
-            surname = "Doe",
-            contact = "+1234567890",
-            email = "john.doe@example.com",
-            login = "jdoe",
-            password = "securepassword",
-            role = UserRole.STUDENT,
-            courses = mutableListOf()
-        )
+//        val user = User(
+//            id = "S1",
+//            name = "John",
+//            surname = "Doe",
+//            contact = "+1234567890",
+//            email = "john.doe@example.com",
+//            login = "jdoe",
+//            password = "securepassword",
+//            role = UserRole.STUDENT,
+//            courses = mutableListOf()
+//        )
+        val user = LocalUsersDataProvider.getUserByID("T2")
 
         val course = LocalCoursesDataProvider.getStaticCoursesData()[0]
         val viewModel: TasksViewModel = viewModel()

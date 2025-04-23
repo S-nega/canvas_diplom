@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kz.narxoz.canvasdiplom.models.Task
+import kz.narxoz.canvasdiplom.models.User
 
 @HiltViewModel
 class TasksViewModel @Inject constructor() : ViewModel() {
@@ -32,7 +33,7 @@ class TasksViewModel @Inject constructor() : ViewModel() {
 
                 currentState.copy(
 //                    tasksList = tasksList,
-                    currentTask = LocalTasksDataProvider.staticTasksData[0]
+                    currentTask = LocalTasksDataProvider.getStaticTasksData()[0]
                 )
             }
         }
@@ -66,7 +67,7 @@ class TasksViewModel @Inject constructor() : ViewModel() {
 //    }
 
     // Функция для перехода на страницу подробностей
-    fun navigateToDetailPage() {
+    fun navigateToDetailPage(user: User, task: Task) {
         _uiState.update {
             it.copy(isShowingListPage = false)
         }

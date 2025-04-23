@@ -3,7 +3,7 @@ package kz.narxoz.canvasdiplom.models
 import java.time.LocalDateTime
 
 data class Task(
-    val id: Int,
+    val id: String, //MR001
     val title: String,
     val description: String,
 
@@ -16,7 +16,7 @@ data class Task(
     val courseID: Int,
     val teacherID: String,
 
-    val scores: List<Scores>,
+//    val scores: List<Scores>,
 )
 
 data class Scores(
@@ -24,6 +24,24 @@ data class Scores(
     val fileUrl: String,
     val grade: Double?
 )
+
+//data class Grade(
+//    val studentId: String,
+//    val taskId: String,
+//
+//)
+
+data class TaskAnswer(
+    val studentId: String,
+    val taskId: String,
+
+    val textAnswer: String?,
+    val fileUrl: String?,
+
+    val score: Int? = 0,
+    val comment: String? = null
+)
+
 
 //fun findGrade(courseId: Int, taskId: Int, studentId: String): Double? {
 //    val course = LocalCoursesDataProvider.getStaticCoursesData().find { it.id == courseId }

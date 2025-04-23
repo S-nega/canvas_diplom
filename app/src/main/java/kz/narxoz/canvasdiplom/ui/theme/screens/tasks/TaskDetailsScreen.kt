@@ -1,4 +1,4 @@
-package kz.narxoz.canvasdiplom.ui.theme.screens
+package kz.narxoz.canvasdiplom.ui.theme.screens.tasks
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,13 +23,13 @@ import kz.narxoz.canvasdiplom.R
 import kz.narxoz.canvasdiplom.data.LocalCoursesDataProvider
 import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
+import kz.narxoz.canvasdiplom.data.LocalUsersDataProvider
 import kz.narxoz.canvasdiplom.models.Course
 import kz.narxoz.canvasdiplom.models.Task
 import kz.narxoz.canvasdiplom.models.User
 import kz.narxoz.canvasdiplom.models.UserRole
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
 import kz.narxoz.canvasdiplom.ui.theme.components.BaseButton
-import kz.narxoz.canvasdiplom.ui.theme.components.BaseTopBar
 
 
 @Composable
@@ -42,7 +42,7 @@ fun TaskDetailsScreen(
 ) {
 //    val bottomNavController = rememberNavController()
 
-    Column {
+//    Column {
 //        BaseTopBar(
 //            modifier = Modifier,
 //            navController = navController,
@@ -53,7 +53,7 @@ fun TaskDetailsScreen(
 //        )
         CurrentTaskCard(task, user, course)
 //        BaseBottomBar(bottomNavController, viewModel, Modifier)
-    }
+//    }
 }
 
 
@@ -69,77 +69,111 @@ fun CurrentTaskCard(
             .padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
             .padding(bottom = dimensionResource(id = R.dimen.padding_medium))
     ) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(color = Color.White)
-        ) {
-            Text(
-                modifier = Modifier
-                    .padding(dimensionResource(id = R.dimen.padding_medium)),
-                text = task.description
-            )
-        }
-        Row (
-            modifier = Modifier
-                .padding(dimensionResource(id = R.dimen.padding_medium))
-        ){
-            Column (
-                modifier = Modifier.weight(1f),
-            ){
-                Text(text = "From:")
-                Text(text = task.startTime.toString())
-            }
-            Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_medium)))
-            Column (
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(text = "To:")
-                Text(text = task.deadline.toString())
-            }
-        }
+        CurrentTaskCardInfo(task)
+        
         Row (
             modifier = Modifier
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround
         ){
-            BaseButton(
-                buttonText = "Add File",
-                modifier = Modifier.weight(1f),
-                onClick = { /*TODO*/ }
-            )
-            Spacer(modifier = Modifier.width(16.dp))
+            if (user.role == UserRole.STUDENT) {
+                BaseButton(
+                    buttonText = "Add File",
+                    modifier = Modifier.weight(1f),
+                    onClick = { /*TODO*/ }
+                )
 
-            BaseButton(
-                buttonText = "Pass",
-                modifier = Modifier.weight(1f),
-                onClick = { /*TODO*/ }
-            )
+                Spacer(modifier = Modifier.width(16.dp))
+
+                BaseButton(
+                    buttonText = "Pass",
+                    modifier = Modifier.weight(1f),
+                    onClick = { /*TODO*/ }
+                )
+            } else if (user.role == UserRole.TEACHER){
+                BaseButton(
+                    buttonText = "Edit",
+                    modifier = Modifier.weight(1f),
+                    onClick = { /*TODO*/ }
+                )
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                BaseButton(
+                    buttonText = "Publish",
+                    modifier = Modifier.weight(1f),
+                    onClick = { /*TODO*/ }
+                )
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                BaseButton(
+                    buttonText = "Check",
+                    modifier = Modifier.weight(1f),
+                    onClick = { /*TODO*/ }
+                )
+            }
         }
     }
 }
 
 
+@Composable
+fun CurrentTaskCardInfo(
+    task: Task
+){
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = Color.White)
+    ) {
+        Text(
+            modifier = Modifier
+                .padding(dimensionResource(id = R.dimen.padding_medium)),
+            text = task.description
+        )
+    }
+    Row (
+        modifier = Modifier
+            .padding(dimensionResource(id = R.dimen.padding_medium))
+    ){
+        Column (
+            modifier = Modifier.weight(1f),
+        ){
+            Text(text = "From:")
+            Text(text = task.startTime.toString())
+        }
+        Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_medium)))
+        Column (
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(text = "To:")
+            Text(text = task.deadline.toString())
+        }
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
 fun TaskDetailsPreview() {
     CanvasDiplomTheme {
 
-        val user = User(
-            id = "S1",
-            name = "John",
-            surname = "Doe",
-            contact = "+1234567890",
-            email = "john.doe@example.com",
-            login = "jdoe",
-            password = "securepassword",
-            role = UserRole.STUDENT,
-            courses = mutableListOf()
-        )
+//        val user = User(
+//            id = "S1",
+//            name = "John",
+//            surname = "Doe",
+//            contact = "+1234567890",
+//            email = "john.doe@example.com",
+//            login = "jdoe",
+//            password = "securepassword",
+//            role = UserRole.STUDENT,
+//            courses = mutableListOf()
+//        )
+
+        val user = LocalUsersDataProvider.getUserByID("T2")
 
         val course = LocalCoursesDataProvider.getStaticCoursesData()[0]
-        val filteredTasks = LocalTasksDataProvider.staticTasksData.filter { task: Task -> task.courseID == course.id }
+        val filteredTasks = LocalTasksDataProvider.getStaticTasksData().filter { task: Task -> task.courseID == course.id }
         val currentTask = filteredTasks[0]
         val viewModel: TasksViewModel = viewModel()
         val navController = rememberNavController()

@@ -1,4 +1,4 @@
-//package kz.narxoz.canvasdiplom.ui.theme.screens
+package kz.narxoz.canvasdiplom.ui.theme.screens.courses//package kz.narxoz.canvasdiplom.ui.theme.screens
 //
 //import androidx.compose.foundation.layout.Column
 //import androidx.compose.foundation.layout.Row

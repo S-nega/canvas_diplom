@@ -14,6 +14,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kz.narxoz.canvasdiplom.R
+import kz.narxoz.canvasdiplom.data.LocalAnswersDataProvider
 import kz.narxoz.canvasdiplom.data.LocalCoursesDataProvider
 import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
@@ -21,7 +22,6 @@ import kz.narxoz.canvasdiplom.models.Task
 import kz.narxoz.canvasdiplom.models.User
 import kz.narxoz.canvasdiplom.models.UserRole
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
-import kz.narxoz.canvasdiplom.ui.theme.components.BaseTopBar
 import kz.narxoz.canvasdiplom.ui.theme.components.ListItem
 import java.time.LocalDateTime
 
@@ -38,19 +38,12 @@ fun InfoPanelScreen(
 
     Column (
     ){
-//        BaseTopBar(
-//            modifier = Modifier,
-//            navController = navController,
-//            title = "Info Panel"
-//        )
         InfoPanelDaysList(
             modifier = Modifier,
             user = user,
             tasksList = tasksList,
             navController = navController
         )
-
-//        BaseBottomBar(bottomNavController, viewModel, modifier)
     }
 }
 
@@ -63,7 +56,7 @@ fun InfoPanelDaysList(
 ){
 //    val tasksSortedByUser = tasksList.toSortedSet()
 //    val tasksSortedByDate = tasksSortedByUser
-    val userTasks = getUserTasksSortedByDeadline(tasksList, user.id)
+    val userTasks = getUserTasksSortedByDeadline(user.id)
 //    val userDeadlines = getUserDeadlines(tasksList, user.id)
 
 //    val fakeDeadlines = listOf(
@@ -89,19 +82,21 @@ fun InfoPanelDaysList(
 //    }
 }
 
-@Composable
-fun getUserDeadlines(tasks: List<Task>, currentUserId: String): List<LocalDateTime> {
-    return tasks
-        .filter { task -> task.scores.any { it.studentId == currentUserId } } // Filter tasks for the current user
-        .map { it.deadline } // Extract deadlines
-        .sorted() // Sort deadlines in ascending order
-}
+//@Composable
+//fun getUserDeadlines(tasks: List<Task>, currentUserId: String): List<LocalDateTime> {
+//    return tasks
+//        .filter { task -> task.scores.any { it.studentId == currentUserId } } // Filter tasks for the current user
+//        .map { it.deadline } // Extract deadlines
+//        .sorted() // Sort deadlines in ascending order
+//}
 
 @Composable
-fun getUserTasksSortedByDeadline(tasks: List<Task>, currentUserId: String): List<Task> {
-    return tasks
-        .filter { task -> task.scores.any { it.studentId == currentUserId } } // Filter tasks for the current user
-        .sortedBy { it.deadline } // Sort by deadline
+fun getUserTasksSortedByDeadline(currentUserId: String): List<Task> {
+    return LocalTasksDataProvider.getTasksByStudentID(studentId = currentUserId)
+//        .filter { task -> answers.filter { answer == task.id}}
+//            //task.scores.any { it.studentId == currentUserId } } // Filter tasks for the current user
+//        .sortedBy { it.deadline } // Sort by deadline
+
 }
 
 @Composable
@@ -126,22 +121,11 @@ fun InfoPanelTasksListInDay(
                     user = user,
                     title = LocalCoursesDataProvider.getCourseByID(task.courseID).title.toString(),
                     description = task.title,
-//                    grade = 0,
                     navController = navController,
                     route = Screen.TaskDetails.createRoute(task.id)
                 ) {
 
                 }
-//                TaskCard(
-//                    user = user,
-//                    task = task,
-//                    course = LocalCoursesDataProvider.getStaticCoursesData()[0],//task.courseID,
-//                    isInfoPanel = true,
-//                    navController = navController,
-//                    onClick = {
-//                        navController.navigate(Screen.TaskDetails.createRoute(task.id))
-//                    }
-//                )
             }
         }
     }
@@ -188,7 +172,7 @@ fun InfoPanelPreview() {
 //        )
 
         val course = LocalCoursesDataProvider.getStaticCoursesData()[0]
-        val filteredTasks = LocalTasksDataProvider.staticTasksData.filter { task: Task -> task.courseID == course.id }
+        val filteredTasks = LocalTasksDataProvider.getStaticTasksData().filter { task: Task -> task.courseID == course.id }
         val currentTask = filteredTasks[0]
         val viewModel: TasksViewModel = viewModel()
         val navController = rememberNavController()

@@ -1,13 +1,10 @@
-package kz.narxoz.canvasdiplom.ui.theme.screens
+package kz.narxoz.canvasdiplom.ui.theme.screens.courses
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -26,6 +23,7 @@ import kz.narxoz.canvasdiplom.models.User
 import kz.narxoz.canvasdiplom.models.UserRole
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
 import kz.narxoz.canvasdiplom.ui.theme.components.ListItem
+import kz.narxoz.canvasdiplom.ui.theme.screens.Screen
 import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 
 @Composable

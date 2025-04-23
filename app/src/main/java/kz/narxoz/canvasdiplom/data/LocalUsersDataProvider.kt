@@ -18,6 +18,17 @@ object LocalUsersDataProvider {
             courses = LocalCoursesDataProvider.getStaticCoursesData()
         ),
         User(
+            id = "S2",
+            name = "2222",
+            surname = "222",
+            contact = "+77077446255",
+            email = "snezhana.golovko@narxoz.kz",
+            login = "s23016985",
+            password = "qweqwe",
+            role = UserRole.STUDENT,
+            courses = LocalCoursesDataProvider.getStaticCoursesData()
+        ),
+        User(
             id = "T2",
             name = "TEACHER",
             surname = "Golovko",
