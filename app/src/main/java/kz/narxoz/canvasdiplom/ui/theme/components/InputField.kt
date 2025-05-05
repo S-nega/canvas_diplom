@@ -1,6 +1,5 @@
 package kz.narxoz.canvasdiplom.ui.theme.components
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
@@ -27,6 +26,8 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kz.narxoz.canvasdiplom.R
+import kz.narxoz.canvasdiplom.ui.theme.Typography
+import kz.narxoz.canvasdiplom.ui.theme.subtitle2TextStyle
 
 @Composable
 fun InputField(
@@ -72,7 +73,6 @@ fun InputField(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .border(1.dp, borderColor, shape = RoundedCornerShape(8.dp))
                 .clip(RoundedCornerShape(8.dp))
         ) {
             TextField(
@@ -91,7 +91,7 @@ fun InputField(
                     }
                 },
                 singleLine = singleLine,
-//                textStyle = ,
+                textStyle = subtitle2TextStyle,
                 enabled = enabled,
                 isError = isError,
                 visualTransformation = visualTransformation,
@@ -107,7 +107,7 @@ fun InputField(
         if (supportingText != null) {
             Text(
                 text = supportingText,
-//                style = captionStyle,
+                style = Typography.bodySmall,
                 color = colorResource(id = R.color.red),
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 4.dp)
             )
@@ -122,15 +122,15 @@ fun InputField(
 @Preview
 @Composable
 private fun InputFieldPreview() {
-    val (autoPrice, setAutoPrice) = remember { mutableStateOf(TextFieldValue("s00000000")) }
+    val (login, setLogin) = remember { mutableStateOf(TextFieldValue("s00000000")) }
     InputField(
         modifier = Modifier
             .padding(top = 16.dp),
-        text = autoPrice,
+        text = login,
         label = "Login",
         supportingText = "Error",
         onDisabledValueChanged = {}
     ) {
-        setAutoPrice(it)
+        setLogin(it)
     }
 }

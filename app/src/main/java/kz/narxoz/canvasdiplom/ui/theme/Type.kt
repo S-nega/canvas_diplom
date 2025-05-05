@@ -181,11 +181,25 @@ val subtitle3TextStyle = TextStyle(
     lineHeight = 26.sp
 )
 
-val button1TextStyle = TextStyle(
-//    fontFamily = interRegular,
+val buttonSTextStyle = TextStyle(
+    fontWeight = FontWeight.SemiBold,
+    fontSize = 12.sp,
+    lineHeight = 14.sp
+)
+val buttonMTextStyle = TextStyle(
     fontWeight = FontWeight.SemiBold,
     fontSize = 14.sp,
     lineHeight = 16.sp
+)
+val buttonLTextStyle = TextStyle(
+    fontWeight = FontWeight.SemiBold,
+    fontSize = 18.sp,
+    lineHeight = 22.sp
+)
+val buttonXLTextStyle = TextStyle(
+    fontWeight = FontWeight.SemiBold,
+    fontSize = 24.sp,
+    lineHeight = 28.sp
 )
 
 val captionStyle = TextStyle(
