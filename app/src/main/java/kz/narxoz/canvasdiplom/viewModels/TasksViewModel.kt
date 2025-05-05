@@ -73,11 +73,11 @@ class TasksViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun navigateToProfileScreen(){
-        _uiState.update {
-            it.copy()
-        }
-    }
+//    fun navigateToProfileScreen(){
+//        _uiState.update {
+//            it.copy()
+//        }
+//    }
 }
 
 annotation class Inject

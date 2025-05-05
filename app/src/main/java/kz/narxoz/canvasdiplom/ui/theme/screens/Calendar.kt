@@ -1,7 +1,6 @@
 package kz.narxoz.canvasdiplom.ui.theme.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -40,13 +38,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kz.narxoz.canvasdiplom.R
 import kz.narxoz.canvasdiplom.models.Events
-import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.models.Hint
 import kz.narxoz.canvasdiplom.models.TimeSlot
 import kz.narxoz.canvasdiplom.models.hintsList
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
 import kz.narxoz.canvasdiplom.ui.theme.Typography
-import kz.narxoz.canvasdiplom.ui.theme.components.BaseTopBar
+import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import java.time.LocalDate
 import java.time.YearMonth
 

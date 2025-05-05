@@ -17,11 +17,6 @@ object LocalTasksDataProvider {
             submittedAt = LocalDateTime.of(2025, 3, 3, 12,14),
             courseID = 1,
             teacherID = "T2",
-//            scores = listOf(
-//                Scores(studentId = "S1", fileUrl = "https://example.com/submission1.pdf", grade = 85.5),
-//                Scores(studentId = "S2", fileUrl = "https://example.com/submission2.pdf", grade = 92.0),
-//                Scores(studentId = "S3", fileUrl = "https://example.com/submission3.pdf", grade = 67.0) // No grade yet
-//            )
         ),
         Task(
             id = "MD002",
@@ -33,11 +28,6 @@ object LocalTasksDataProvider {
             submittedAt = LocalDateTime.of(2025, 3, 3, 12,14),
             courseID = 1,
             teacherID = "T2",
-//            scores = listOf(
-//                Scores(studentId = "S1", fileUrl = "https://example.com/submission1.pdf", grade = 86.5),
-//                Scores(studentId = "S2", fileUrl = "https://example.com/submission2.pdf", grade = 91.0),
-//                Scores(studentId = "S3", fileUrl = "https://example.com/submission3.pdf", grade = 68.0) // No grade yet
-//            )
         ),
         Task(
             id = "L01",
@@ -49,11 +39,6 @@ object LocalTasksDataProvider {
             submittedAt = LocalDateTime.of(2025, 3, 3, 12,14),
             courseID = 3,
             teacherID = "T2",
-//            scores = listOf(
-//                Scores(studentId = "S1", fileUrl = "https://example.com/submission1.pdf", grade = 84.5),
-//                Scores(studentId = "S2", fileUrl = "https://example.com/submission2.pdf", grade = 90.0),
-//                Scores(studentId = "S3", fileUrl = "https://example.com/submission3.pdf", grade = 66.0) // No grade yet
-//            )
         )
     )
 
@@ -66,8 +51,6 @@ object LocalTasksDataProvider {
         val answers = LocalAnswersDataProvider.getAnswersByStudentID(studentId)
         val taskIdsWithAnswers = answers.map { it.taskId }.toSet()
         val tasksForStudent = staticTasksData.filter { it.id in taskIdsWithAnswers }
-
-//        val task = staticTasksData.filter { task: Task -> task.id == answers: Answer -> answer.taskId }
         return tasksForStudent
     }
 

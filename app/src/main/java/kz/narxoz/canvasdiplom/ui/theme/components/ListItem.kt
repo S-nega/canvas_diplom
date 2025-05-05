@@ -20,17 +20,13 @@ import kz.narxoz.canvasdiplom.ui.theme.Typography
 @Composable
 fun ListItem(
     user: User,
-//    task: Task? = null,
-//    course: Course? = null,
     title: String,
     description: String,
     grade: Double? = null,
-//    isInfoPanel: Boolean? = false,
     navController: NavController,
     route: String,
     onClick: () -> Unit
 ) {
-//    val item = { task ?: course }
 
     Card(
         modifier = Modifier
@@ -39,7 +35,6 @@ fun ListItem(
             )
             .clickable {
                 navController.navigate( route )
-//                navController.navigate( if (task != null) {Screen.TaskDetails.createRoute(task.id)} else {Screen.Tasks})
             }
     ) {
         Row(
@@ -54,7 +49,6 @@ fun ListItem(
                 Column {
                     Text(
                         text = title,
-//                        text = if (isInfoPanel == true) {course.title} else {task.title} ,
                         style = Typography.titleMedium
                     )
                     Text(

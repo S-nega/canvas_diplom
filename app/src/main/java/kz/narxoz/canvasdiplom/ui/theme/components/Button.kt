@@ -70,44 +70,6 @@ fun BaseButton(
     }
 }
 
-//@Composable
-//fun BaseDebouncedButton(
-//    modifier: Modifier = Modifier,
-//    backgroundColor: ButtonColors = ButtonDefaults.buttonColors(
-//        containerColor = colorResource(id = R.color.red),
-//        contentColor = colorResource(id = R.color.gray_75)
-//    ),
-//    buttonText: String = "",
-//    enabled: Boolean = true,
-//    isRounded: Boolean = false,
-//    size: ButtonSizes? = null,
-//    style: ButtonStyles? = null,
-//    onClick: (() -> Unit)? = null
-//) {
-//    val coroutineScope = rememberCoroutineScope()
-//    var isClickable by remember { mutableStateOf(true) }
-//
-//    BaseButton(
-//        modifier = modifier,
-//        backgroundColor = backgroundColor,
-//        buttonText = buttonText,
-//        enabled = enabled,
-//        size = size,
-//        style = style,
-//        isRounded = isRounded,
-//        onClick = {
-//            if (isClickable) {
-//                onClick?.invoke()
-//                isClickable = false
-//                coroutineScope.launch {
-//                    delay(0)
-//                    isClickable = true
-//                }
-//            }
-//        }
-//    )
-//}
-
 @Composable
 @Preview(showBackground = true)
 fun BaseButtonPreview() {
@@ -123,9 +85,5 @@ fun BaseButtonPreview() {
             enabled = true,
             buttonText = "Base Button"
         )
-
-//        BaseDebouncedButton(
-//            buttonText = "Debounced Button"
-//        )
     }
 }

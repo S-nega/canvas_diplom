@@ -55,34 +55,34 @@ fun CoursesScreen(
         }
     }
 }
-
-
-@Composable
-fun RegisteredCoursesScreen(
-    modifier: Modifier
-){
-
-}
-
-@Composable
-fun IndividualStudyPlanScreen(
-    modifier: Modifier
-){
-
-}
-
-
-@Composable
-fun CoursesTopBar(
-    modifier: Modifier
-){
-    Box(modifier = Modifier){
-        Button(onClick = { /*TODO*/ }) {
-            Text(text = "back") // change to icon later
-        }
-        Text(text = "Screen Title") // variable
-    }
-}
+//
+//
+//@Composable
+//fun RegisteredCoursesScreen(
+//    modifier: Modifier
+//){
+//
+//}
+//
+//@Composable
+//fun IndividualStudyPlanScreen(
+//    modifier: Modifier
+//){
+//
+//}
+//
+//
+//@Composable
+//fun CoursesTopBar(
+//    modifier: Modifier
+//){
+//    Box(modifier = Modifier){
+//        Button(onClick = { /*TODO*/ }) {
+//            Text(text = "back") // change to icon later
+//        }
+//        Text(text = "Screen Title") // variable
+//    }
+//}
 
 @Composable
 fun CoursesBottomBar(
@@ -121,17 +121,7 @@ fun CoursesBottomBar(
 fun CoursesListPreview() {
     CanvasDiplomTheme {
 
-        val user = User(
-            id = "S1",
-            name = "John",
-            surname = "Doe",
-            contact = "+1234567890",
-            email = "john.doe@example.com",
-            login = "jdoe",
-            password = "securepassword",
-            role = UserRole.STUDENT,
-            courses = mutableListOf()
-        )
+        val user = LocalUsersDataProvider.getUserByID("S1")
 
         val viewModel: TasksViewModel = viewModel()
         val navController = rememberNavController()

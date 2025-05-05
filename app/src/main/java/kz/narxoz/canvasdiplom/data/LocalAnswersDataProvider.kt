@@ -1,5 +1,6 @@
 package kz.narxoz.canvasdiplom.data
 
+import kz.narxoz.canvasdiplom.models.Scores
 import kz.narxoz.canvasdiplom.models.Task
 import kz.narxoz.canvasdiplom.models.TaskAnswer
 
@@ -31,6 +32,10 @@ object LocalAnswersDataProvider {
         )
 
     )
+
+//    fun setScore(taskId: String, studentId: String, score: Int) {
+//        LocalAnswersDataProvider.staticAnswersData.set(taskId, studentId, score)
+//    } //file
 
     fun getStaticAnswersData(): List<TaskAnswer> = LocalAnswersDataProvider.staticAnswersData
 

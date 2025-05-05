@@ -73,7 +73,6 @@ fun InputField(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-//                .border(1.dp, borderColor, shape = RoundedCornerShape(8.dp))
                 .clip(RoundedCornerShape(8.dp))
         ) {
             TextField(

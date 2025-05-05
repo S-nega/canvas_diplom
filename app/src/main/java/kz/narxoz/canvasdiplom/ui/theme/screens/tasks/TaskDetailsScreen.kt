@@ -30,6 +30,7 @@ import kz.narxoz.canvasdiplom.models.User
 import kz.narxoz.canvasdiplom.models.UserRole
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
 import kz.narxoz.canvasdiplom.ui.theme.components.BaseButton
+import kz.narxoz.canvasdiplom.ui.theme.screens.Screen
 
 
 @Composable
@@ -66,7 +67,7 @@ fun CurrentTaskCard(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
+//            .padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
             .padding(bottom = dimensionResource(id = R.dimen.padding_medium))
     ) {
         CurrentTaskCardInfo(task)
@@ -94,7 +95,7 @@ fun CurrentTaskCard(
                 BaseButton(
                     buttonText = "Edit",
                     modifier = Modifier.weight(1f),
-                    onClick = { /*TODO*/ }
+//                    onClick = {Screen.TaskEdit.createRoute(task.id)}
                 )
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -122,17 +123,14 @@ fun CurrentTaskCard(
 fun CurrentTaskCardInfo(
     task: Task
 ){
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(color = Color.White)
-    ) {
-        Text(
-            modifier = Modifier
-                .padding(dimensionResource(id = R.dimen.padding_medium)),
-            text = task.description
-        )
-    }
+//    Card(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .background(color = Color.White),
+//    ) {
+        Text(text = task.title)
+        Text(text = task.description)
+//    }
     Row (
         modifier = Modifier
             .padding(dimensionResource(id = R.dimen.padding_medium))
@@ -170,7 +168,7 @@ fun TaskDetailsPreview() {
 //            courses = mutableListOf()
 //        )
 
-        val user = LocalUsersDataProvider.getUserByID("T2")
+        val user = LocalUsersDataProvider.getUserByID("T2") //S1
 
         val course = LocalCoursesDataProvider.getStaticCoursesData()[0]
         val filteredTasks = LocalTasksDataProvider.getStaticTasksData().filter { task: Task -> task.courseID == course.id }

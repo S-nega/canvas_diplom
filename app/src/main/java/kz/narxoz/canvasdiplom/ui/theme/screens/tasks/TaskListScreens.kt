@@ -38,13 +38,6 @@ fun TasksScreen(
     Column {
         val isAbleAdding = user.role == UserRole.TEACHER
         val isAbleGrade = user.role == UserRole.STUDENT
-//        BaseTopBar(
-//            modifier = Modifier,
-//            navController = navController,
-//            course.title,
-//            previousScreen = viewModel.navigateToDetailPage(),
-//            nextScreen = viewModel.navigateToAddPage(),
-//        )
 
         val filteredTasks = LocalTasksDataProvider.getStaticTasksData().filter { task: Task -> task.courseID == course.id }
         TasksList(user = user, filteredTasks = filteredTasks, course = course, navController = navController)
@@ -63,7 +56,7 @@ fun TasksList(
     LazyColumn(
         modifier = Modifier
 //            .fillMaxWidth()
-            .padding(dimensionResource(id = R.dimen.padding_medium))
+//            .padding(dimensionResource(id = R.dimen.padding_medium))
     ) {
         items(filteredTasks) { task ->
             ListItem(
@@ -85,21 +78,10 @@ fun TasksList(
 fun TaskListPreview() {
     CanvasDiplomTheme {
 
-//        val user = User(
-//            id = "S1",
-//            name = "John",
-//            surname = "Doe",
-//            contact = "+1234567890",
-//            email = "john.doe@example.com",
-//            login = "jdoe",
-//            password = "securepassword",
-//            role = UserRole.STUDENT,
-//            courses = mutableListOf()
-//        )
         val user = LocalUsersDataProvider.getUserByID("T2")
 
         val course = LocalCoursesDataProvider.getStaticCoursesData()[0]
-        val viewModel: TasksViewModel = viewModel()
+//        val viewModel: TasksViewModel = viewModel()
         val navController = rememberNavController()
 
         TasksScreen(Modifier, user = user, course = course, navController = navController)
