@@ -4,7 +4,7 @@ import java.math.BigInteger
 import java.sql.Timestamp
 
 data class ThreadRegistration (
-    val userId: BigInteger,
-    val threadId: BigInteger,
+    val userId: Long,
+    val threadId: Long,
     val registrationDate: Timestamp
 )

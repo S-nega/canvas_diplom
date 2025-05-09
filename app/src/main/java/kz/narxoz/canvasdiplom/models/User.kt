@@ -5,8 +5,8 @@ import java.sql.Timestamp
 import java.util.UUID
 
 data class User(
-    val id: BigInteger,
-    val keycloakId: UUID,
+    val id: Long,
+    val keycloakId: UUID? = null,
     val name: String,
     val surname: String,
     val email: String,

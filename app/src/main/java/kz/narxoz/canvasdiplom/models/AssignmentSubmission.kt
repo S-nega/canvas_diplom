@@ -5,11 +5,11 @@ import java.math.BigInteger
 import java.sql.Timestamp
 
 data class AssignmentSubmission (
-    val id: BigInteger,
-    val assignmentId: BigInteger,
-    val userId: BigInteger,
+    val id: Long,
+    val assignmentId: Long,
+    val userId: Long,
     val submittedAt: Timestamp,
-    val fileUrls: List<String>,
+    val fileUrls: List<String>? = null,
     val comment: String,
     val score: Double,
     val feedback: String,

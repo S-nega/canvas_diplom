@@ -13,10 +13,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kz.narxoz.canvasdiplom.R
+import kz.narxoz.canvasdiplom.data.LocalAssignmentDataProvider
 import kz.narxoz.canvasdiplom.data.LocalCoursesDataProvider
 import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
 import kz.narxoz.canvasdiplom.data.LocalUsersDataProvider
+import kz.narxoz.canvasdiplom.models.Assignment
 import kz.narxoz.canvasdiplom.models.Course
 import kz.narxoz.canvasdiplom.models.Task
 import kz.narxoz.canvasdiplom.models.User
@@ -39,7 +41,7 @@ fun TasksScreen(
         val isAbleAdding = user.role == UserRole.TEACHER
         val isAbleGrade = user.role == UserRole.STUDENT
 
-        val filteredTasks = LocalTasksDataProvider.getStaticTasksData().filter { task: Task -> task.courseID == course.id }
+        val filteredTasks = LocalAssignmentDataProvider.getStaticAssignmentData().filter { assignment: Assignment -> assignment.assignmentGroupId == course.id }
         TasksList(user = user, filteredTasks = filteredTasks, course = course, navController = navController)
     }
 }
@@ -48,7 +50,7 @@ fun TasksScreen(
 @Composable
 fun TasksList(
     viewModel: TasksViewModel = viewModel(),
-    filteredTasks: List<Task>,
+    filteredTasks: List<Assignment>,
     user: User,
     course: Course,
     navController: NavController
@@ -78,7 +80,7 @@ fun TasksList(
 fun TaskListPreview() {
     CanvasDiplomTheme {
 
-        val user = LocalUsersDataProvider.getUserByID("T2")
+        val user = LocalUsersDataProvider.getUserByID(3)
 
         val course = LocalCoursesDataProvider.getStaticCoursesData()[0]
 //        val viewModel: TasksViewModel = viewModel()

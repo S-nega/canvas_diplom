@@ -40,12 +40,12 @@ fun CoursesScreen(
             .fillMaxWidth()
     ){
         items(courses){course ->
-            //, key = {course -> course.id}) { course ->
             ListItem(
                 user = user,
                 title = course.title,
-                description = LocalUsersDataProvider.getUserByID(user.id).name + " "
-                        + LocalUsersDataProvider.getUserByID(user.id).surname,
+                description = course.description,
+//                LocalUsersDataProvider.getUserByID(user.id).name + " "
+//                        + LocalUsersDataProvider.getUserByID(user.id).surname,
                 //+ "/n" + course.credits + " " + course.hoursPerWeek,
                 navController = navController,
                 route = Screen.Tasks.route
@@ -55,34 +55,6 @@ fun CoursesScreen(
         }
     }
 }
-//
-//
-//@Composable
-//fun RegisteredCoursesScreen(
-//    modifier: Modifier
-//){
-//
-//}
-//
-//@Composable
-//fun IndividualStudyPlanScreen(
-//    modifier: Modifier
-//){
-//
-//}
-//
-//
-//@Composable
-//fun CoursesTopBar(
-//    modifier: Modifier
-//){
-//    Box(modifier = Modifier){
-//        Button(onClick = { /*TODO*/ }) {
-//            Text(text = "back") // change to icon later
-//        }
-//        Text(text = "Screen Title") // variable
-//    }
-//}
 
 @Composable
 fun CoursesBottomBar(
@@ -121,7 +93,7 @@ fun CoursesBottomBar(
 fun CoursesListPreview() {
     CanvasDiplomTheme {
 
-        val user = LocalUsersDataProvider.getUserByID("S1")
+        val user = LocalUsersDataProvider.getUserByID(1)
 
         val viewModel: TasksViewModel = viewModel()
         val navController = rememberNavController()

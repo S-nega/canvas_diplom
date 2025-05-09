@@ -6,7 +6,7 @@ import java.sql.Timestamp
 import java.util.Date
 
 data class Course (
-    val id: BigInteger,
+    val id: Long, //BigInteger,
     val title: String,
 
     val description: String,

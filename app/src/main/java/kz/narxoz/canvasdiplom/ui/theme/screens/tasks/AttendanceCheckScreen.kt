@@ -27,10 +27,10 @@ fun AttendanceCheckScreen(
     user: User, //teacher
     course: Course
 ){
-    if (user.id == course.teacherID) {
+//    if (user.id == course.teacherID) {
 //        val student = LocalUsersDataProvider.getUserByID(studentId)
 //        AttendanceTable(students = course.studentsID, dates =, attendance = )
-    }
+//    }
 //    LazyColumn {
 //        items(course.studentsID) { studentId ->
 //            Row {
@@ -100,5 +100,5 @@ fun AttendanceTable(
 @Preview(showBackground = true)
 @Composable
 fun AttendancePreview(){
-    AttendanceCheckScreen(user = LocalUsersDataProvider.getUserByID("T2"), course = LocalCoursesDataProvider.getCourseByID(2))
+    AttendanceCheckScreen(user = LocalUsersDataProvider.getUserByID(1), course = LocalCoursesDataProvider.getCourseByID(2))
 }

@@ -24,6 +24,7 @@ import kz.narxoz.canvasdiplom.data.LocalCoursesDataProvider
 import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
 import kz.narxoz.canvasdiplom.data.LocalUsersDataProvider
+import kz.narxoz.canvasdiplom.models.Assignment
 import kz.narxoz.canvasdiplom.models.Course
 import kz.narxoz.canvasdiplom.models.Task
 import kz.narxoz.canvasdiplom.models.User
@@ -37,7 +38,7 @@ import kz.narxoz.canvasdiplom.ui.theme.screens.Screen
 fun TaskDetailsScreen(
     navController: NavController,
     viewModel: TasksViewModel,
-    task: Task,
+    task: Assignment,
     user: User,
     course: Course,
 ) {
@@ -60,7 +61,7 @@ fun TaskDetailsScreen(
 
 @Composable
 fun CurrentTaskCard(
-    task: Task,
+    task: Assignment,
     user: User,
     course: Course,
 ){
@@ -121,7 +122,7 @@ fun CurrentTaskCard(
 
 @Composable
 fun CurrentTaskCardInfo(
-    task: Task
+    task: Assignment
 ){
 //    Card(
 //        modifier = Modifier
@@ -138,45 +139,33 @@ fun CurrentTaskCardInfo(
         Column (
             modifier = Modifier.weight(1f),
         ){
-            Text(text = "From:")
-            Text(text = task.startTime.toString())
+//            Text(text = "From:")
+//            Text(text = task.startTime.toString())
         }
         Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_medium)))
         Column (
             modifier = Modifier.weight(1f)
         ) {
             Text(text = "To:")
-            Text(text = task.deadline.toString())
+            Text(text = task.dueDate.toString())
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun TaskDetailsPreview() {
-    CanvasDiplomTheme {
-
-//        val user = User(
-//            id = "S1",
-//            name = "John",
-//            surname = "Doe",
-//            contact = "+1234567890",
-//            email = "john.doe@example.com",
-//            login = "jdoe",
-//            password = "securepassword",
-//            role = UserRole.STUDENT,
-//            courses = mutableListOf()
-//        )
-
-        val user = LocalUsersDataProvider.getUserByID("T2") //S1
-
-        val course = LocalCoursesDataProvider.getStaticCoursesData()[0]
-        val filteredTasks = LocalTasksDataProvider.getStaticTasksData().filter { task: Task -> task.courseID == course.id }
-        val currentTask = filteredTasks[0]
-        val viewModel: TasksViewModel = viewModel()
-        val navController = rememberNavController()
-
-        TaskDetailsScreen(navController = navController, task = currentTask, user = user, course = course, viewModel = viewModel)
-//        TasksScreen(user = user, course = course)
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun TaskDetailsPreview() {
+//    CanvasDiplomTheme {
+//
+//        val user = LocalUsersDataProvider.getUserByID(3) //S1
+//
+//        val course = LocalCoursesDataProvider.getStaticCoursesData()[0]
+//        val filteredTasks = LocalTasksDataProvider.getStaticTasksData().filter { task: Task -> task.courseID == course.id }
+//        val currentTask = filteredTasks[0]
+//        val viewModel: TasksViewModel = viewModel()
+//        val navController = rememberNavController()
+//
+//        TaskDetailsScreen(navController = navController, task = currentTask, user = user, course = course, viewModel = viewModel)
+////        TasksScreen(user = user, course = course)
+//    }
+//}

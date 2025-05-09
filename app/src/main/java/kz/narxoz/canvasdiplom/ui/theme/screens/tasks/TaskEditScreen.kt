@@ -21,6 +21,7 @@ import kz.narxoz.canvasdiplom.R
 import kz.narxoz.canvasdiplom.data.LocalAnswersDataProvider
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
 import kz.narxoz.canvasdiplom.data.LocalUsersDataProvider
+import kz.narxoz.canvasdiplom.models.Assignment
 import kz.narxoz.canvasdiplom.models.Task
 import kz.narxoz.canvasdiplom.models.User
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
@@ -30,15 +31,15 @@ import kz.narxoz.canvasdiplom.ui.theme.components.InputField
 
 @Composable
 fun TaskEditScreen( //Add
-    task: Task? = null,
+    task: Assignment? = null,
     user: User // teacher id
 ){
 //    val answersList = task?.let { LocalAnswersDataProvider.getAnswersByTaskID(it.id) }
 //    var currentIndex by remember { mutableIntStateOf(0) }
     val (title, setTitle) = remember { mutableStateOf(TextFieldValue(task?.title ?: "")) }
     val (description, setDesc) = remember { mutableStateOf(TextFieldValue(task?.description ?: "")) }
-    val (fromDate, setFromDate) = remember { mutableStateOf(task?.startTime ?: "") }
-    val (tillDate, setTillDate) = remember { mutableStateOf(task?.deadline ?: "") }
+//    val (fromDate, setFromDate) = remember { mutableStateOf(task?.dueDate ?: "") }
+    val (tillDate, setTillDate) = remember { mutableStateOf(task?.dueDate ?: "") }
 
 
     Column {
@@ -116,7 +117,7 @@ fun TaskEditScreen( //Add
 @Composable
 fun TaskEditScreenPreview() {
     CanvasDiplomTheme {
-        val user = LocalUsersDataProvider.getUserByID("T2")
+        val user = LocalUsersDataProvider.getUserByID(3)
 //        val task = LocalTasksDataProvider.getTaskByID("L01")
 
         TaskEditScreen( user = user)

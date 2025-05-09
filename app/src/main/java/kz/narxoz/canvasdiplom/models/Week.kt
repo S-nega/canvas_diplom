@@ -4,8 +4,8 @@ import java.math.BigInteger
 import java.sql.Timestamp
 
 data class Week (
-    val id: BigInteger,
-    val threadId: BigInteger,
+    val id: Long,
+    val threadId: Long,
     val weekNumber: Int,
     val type: String,
     val title: String,

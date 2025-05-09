@@ -4,10 +4,10 @@ import java.math.BigInteger
 import java.sql.Timestamp
 
 data class Thread(
-    val id: BigInteger,
-    val courseId: BigInteger,
-    val semesterId: BigInteger,
-    val teacherId: BigInteger,
+    val id: Long,
+    val courseId: Long,
+    val semesterId: Long,
+    val teacherId: Long,
     val title: String,
     val syllabusUrl: String,
     val maxStudents: Int,

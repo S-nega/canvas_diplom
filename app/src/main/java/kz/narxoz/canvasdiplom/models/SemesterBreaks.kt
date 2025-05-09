@@ -5,8 +5,8 @@ import java.sql.Timestamp
 import java.util.Date
 
 data class SemesterBreaks(
-    val id: BigInteger,
-    val semesterId: BigInteger,
+    val id: Long,
+    val semesterId: Long,
     val breakDate: Date,
     val description: String,
 

@@ -5,7 +5,7 @@ import java.sql.Timestamp
 import java.util.Date
 
 data class Semester (
-    val id: BigInteger,
+    val id: Long,
     val name: String,
     val startDate: Date,
     val endDate: Date,

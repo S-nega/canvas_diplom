@@ -21,8 +21,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kz.narxoz.canvasdiplom.R
 import kz.narxoz.canvasdiplom.data.LocalAnswersDataProvider
+import kz.narxoz.canvasdiplom.data.LocalAssignmentDataProvider
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
 import kz.narxoz.canvasdiplom.data.LocalUsersDataProvider
+import kz.narxoz.canvasdiplom.models.Assignment
+import kz.narxoz.canvasdiplom.models.AssignmentSubmission
 import kz.narxoz.canvasdiplom.models.Task
 import kz.narxoz.canvasdiplom.models.TaskAnswer
 import kz.narxoz.canvasdiplom.models.User
@@ -34,10 +37,10 @@ import kz.narxoz.canvasdiplom.ui.theme.components.InputField
 
 @Composable
 fun TaskCheckScreen(
-    task: Task,
+    task: Assignment,
     user: User // teacher id
 ){
-    val answersList = LocalAnswersDataProvider.getAnswersByTaskID(task.id)
+    val answersList = LocalAssignmentDataProvider.getAssignmentSubmissionByAssignmentID(task.id)
     var currentIndex by remember { mutableIntStateOf(0) }
 
 
@@ -75,14 +78,14 @@ fun TaskCheckScreen(
 
 @Composable
 fun TaskCheckCard(
-    answer: TaskAnswer,
+    answer: AssignmentSubmission,
 ){
     Card (
         modifier = Modifier.fillMaxWidth()
     ){
         val (grade, setGrade) = remember { mutableStateOf(TextFieldValue("")) }
         val (comment, setComment) = remember { mutableStateOf(TextFieldValue("")) }
-        val currentStudent = LocalUsersDataProvider.getUserByID(answer.studentId)
+        val currentStudent = LocalUsersDataProvider.getUserByID(answer.userId)
 
         Column(
             modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small)),
@@ -90,14 +93,16 @@ fun TaskCheckCard(
 
             Text(currentStudent.name + " " + currentStudent.surname)
 
-            if (answer.fileUrl != null) {
+            if (answer.fileUrls != null) {
                 BaseButton(
-                    onClick = { openFile(answer.fileUrl) },
+                    onClick = { openFile(answer.fileUrls.toString()) }, /// !!!!
                     style = ButtonStyles.TINTED,
                     buttonText = "Open file"
                 )
             }
-            Text(answer.textAnswer.toString())
+            Text(answer.comment)
+            Text(answer.feedback)
+//            textAnswer.toString())
 //            Text(answer.comment.toString())
             
             InputField(
@@ -128,8 +133,8 @@ fun openFile(url: String) {
 @Composable
 fun TaskCheckCardPreview() {
     CanvasDiplomTheme {
-        val user = LocalUsersDataProvider.getUserByID("T2")
-        val task = LocalTasksDataProvider.getTaskByID("L01")
+        val user = LocalUsersDataProvider.getUserByID(3)
+        val task = LocalAssignmentDataProvider.getAssignmentByID(1)
 
 //        TaskCheckCard(task = task, user = user)
         TaskCheckScreen(task = task, user = user)

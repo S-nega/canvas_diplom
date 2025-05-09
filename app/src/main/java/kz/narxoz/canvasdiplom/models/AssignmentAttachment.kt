@@ -4,8 +4,8 @@ import java.math.BigInteger
 import java.sql.Timestamp
 
 data class AssignmentAttachment (
-    val id: BigInteger,
-    val assignmentId: BigInteger,
+    val id: Long,
+    val assignmentId: Long,
     val fileUrl: String,
 
     val createdAt: Timestamp,
