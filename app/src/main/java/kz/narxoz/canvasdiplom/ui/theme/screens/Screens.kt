@@ -15,7 +15,7 @@ sealed class Screen(val route: String, val icon: ImageVector?, val label: String
     object Courses : Screen("courses", Icons.Default.List, "Courses")
     object Tasks : Screen("tasks", Icons.Default.List, "Tasks")
     object TaskDetails : Screen("task_details/{taskId}", Icons.Default.Info, "Task's Details") {
-        fun createRoute(taskId: String) = "task_details/$taskId"
+        fun createRoute(taskId: Long) = "task_details/$taskId"
     }
     object TaskEdit : Screen("task_edit/{taskId}", Icons.Default.Info, "Edit Task") {
         fun createRoute(taskId: String) = "task_edit/$taskId"

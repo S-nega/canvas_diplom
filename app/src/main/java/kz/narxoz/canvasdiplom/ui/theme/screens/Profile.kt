@@ -18,6 +18,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kz.narxoz.canvasdiplom.R
+import kz.narxoz.canvasdiplom.data.LocalUsersDataProvider
 import kz.narxoz.canvasdiplom.models.User
 import kz.narxoz.canvasdiplom.models.UserRole
 import kz.narxoz.canvasdiplom.ui.theme.CanvasDiplomTheme
@@ -76,7 +77,6 @@ fun InfoBlock(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
     ){
         Text(text = "id: " + user.id)
-        Text(text = "Contact: " + user.contact)
         Text(text = "Email: " + user.email)
     }
 }
@@ -85,20 +85,9 @@ fun InfoBlock(
 @Composable
 fun PreviewProfile() {
     CanvasDiplomTheme {
-        val context = LocalContext.current
         val viewModel: TasksViewModel = viewModel()
 
-        val user = User(
-            id = "S1",
-            name = "John",
-            surname = "Doe",
-            contact = "+1234567890",
-            email = "john.doe@example.com",
-            login = "jdoe",
-            password = "securepassword",
-            role = UserRole.STUDENT,
-            courses = mutableListOf()
-        )
+        val user = LocalUsersDataProvider.getUserByID(1)
 
         ProfileScreen(
             modifier = Modifier,

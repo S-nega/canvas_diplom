@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kz.narxoz.canvasdiplom.models.Assignment
 import kz.narxoz.canvasdiplom.models.Task
 import kz.narxoz.canvasdiplom.models.User
 
@@ -46,14 +47,12 @@ class TasksViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    // Функция для перехода на страницу списка видов спорта
     fun navigateToListPage() {
         _uiState.update {
             it.copy(isShowingListPage = true, isShowingAddPage = false)
         }
     }
 
-    // Функция для перехода на страницу добавления нового спорта
     fun navigateToAddPage() {
         _uiState.update {
             it.copy(isShowingListPage = false, isShowingAddPage = true)
@@ -67,7 +66,8 @@ class TasksViewModel @Inject constructor() : ViewModel() {
 //    }
 
     // Функция для перехода на страницу подробностей
-    fun navigateToDetailPage(user: User, task: Task) {
+    fun
+            navigateToDetailPage(user: User, task: Assignment) {
         _uiState.update {
             it.copy(isShowingListPage = false)
         }

@@ -13,9 +13,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kz.narxoz.canvasdiplom.R
+import kz.narxoz.canvasdiplom.data.LocalAssignmentDataProvider
 import kz.narxoz.canvasdiplom.data.LocalCoursesDataProvider
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
 import kz.narxoz.canvasdiplom.data.LocalUsersDataProvider
+import kz.narxoz.canvasdiplom.models.Assignment
 import kz.narxoz.canvasdiplom.models.Course
 import kz.narxoz.canvasdiplom.models.Task
 import kz.narxoz.canvasdiplom.models.User
@@ -23,6 +25,7 @@ import kz.narxoz.canvasdiplom.models.UserRole
 import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.ui.theme.components.BaseBottomBar
 import kz.narxoz.canvasdiplom.ui.theme.components.BaseTopBar
+import kz.narxoz.canvasdiplom.ui.theme.screens.courses.CourseRegistrationScreen
 import kz.narxoz.canvasdiplom.ui.theme.screens.courses.CoursesScreen
 import kz.narxoz.canvasdiplom.ui.theme.screens.tasks.TaskDetailsScreen
 import kz.narxoz.canvasdiplom.ui.theme.screens.tasks.TaskEditScreen
@@ -66,15 +69,17 @@ fun MainScreen() {
     val navController = rememberNavController()
     val viewModel: TasksViewModel = viewModel()
 
-    val user = LocalUsersDataProvider.getUserByID("T2")
+    val user = LocalUsersDataProvider.getUserByID(3)
     val courses = LocalCoursesDataProvider.getStaticCoursesData()
     val course = LocalCoursesDataProvider.getStaticCoursesData()[0]
 
     // i need to move sorting into another place !!!
-    val tasks = if (user.role == UserRole.STUDENT) {
-        LocalTasksDataProvider.getTasksByStudentID(user.id)
+    val assignments = if (user.role == UserRole.STUDENT) {
+        LocalAssignmentDataProvider.getAssignmentsByStudentID(user.id)
+//        LocalTasksDataProvider.getTasksByStudentID(user.id)
     } else {
-        LocalTasksDataProvider.getStaticTasksData()
+        LocalAssignmentDataProvider.getStaticAssignmentData()
+//        LocalTasksDataProvider.getStaticTasksData()
     }
 
     Scaffold(
@@ -102,22 +107,24 @@ fun MainScreen() {
                 .padding(dimensionResource(id = R.dimen.padding_medium))
         ) {
             composable(Screen.Profile.route) { ProfileScreen(Modifier, user = user, navController = navController, viewModel = viewModel) }
-            composable(Screen.Info.route) { InfoPanelScreen(Modifier, user, tasks, navController = navController) }
+            composable(Screen.Info.route) { InfoPanelScreen(Modifier, user, assignments, navController = navController) }
             composable(Screen.Calendar.route) { CalendarScreen(Modifier, navController) }
-            composable(Screen.Courses.route) { CoursesScreen(Modifier, user, courses, navController) }
+            composable(Screen.Courses.route) { CourseRegistrationScreen(Modifier, user, courses) }
+//            composable(Screen.Courses.route) { CoursesScreen(Modifier, user, courses, navController) }
             composable(Screen.Tasks.route) { TasksScreen(Modifier, navController, user, course) }
             composable(Screen.TaskDetails.route) { backStackEntry ->
-                val taskId = backStackEntry.arguments?.getString("taskId")
-                Log.d("TaskDetails", "Task id: ${backStackEntry.arguments?.getString("taskId")}")
-                if (taskId != null) {
-                    TaskDetailsScreen(navController, viewModel, tasks.find { task: Task -> task.id == taskId }!!, user, course)
+                val assignmentId = backStackEntry.arguments?.getLong("assignmentId")
+                Log.d("TaskDetails", "Task id: ${backStackEntry.arguments?.getLong("assignmentId")}")
+                Log.d("TaskDetails", "Task id: ${assignmentId}")
+                if (assignmentId != null) {
+                    TaskDetailsScreen(navController, viewModel, assignments.find { assignment: Assignment -> assignment.id == assignmentId }!!, user, course)
                 }
             }
             composable(Screen.TaskEdit.route) { backStackEntry ->
-                val taskId = backStackEntry.arguments?.getString("taskId")
-                Log.d("TaskDetails", "Task id: ${backStackEntry.arguments?.getString("taskId")}")
-                if (taskId != null) {
-                    TaskEditScreen(tasks.find { task: Task -> task.id == taskId }!!, user)
+                val assignmentId = backStackEntry.arguments?.getLong("assignmentId")
+                Log.d("TaskDetails", "Task id: ${backStackEntry.arguments?.getLong("assignmentId")}")
+                if (assignmentId != null) {
+                    TaskEditScreen(assignments.find { assignment: Assignment -> assignment.id == assignmentId }!!, user)
                 }
             }
         }
