@@ -47,14 +47,12 @@ class TasksViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    // Функция для перехода на страницу списка видов спорта
     fun navigateToListPage() {
         _uiState.update {
             it.copy(isShowingListPage = true, isShowingAddPage = false)
         }
     }
 
-    // Функция для перехода на страницу добавления нового спорта
     fun navigateToAddPage() {
         _uiState.update {
             it.copy(isShowingListPage = false, isShowingAddPage = true)
@@ -68,7 +66,8 @@ class TasksViewModel @Inject constructor() : ViewModel() {
 //    }
 
     // Функция для перехода на страницу подробностей
-    fun navigateToDetailPage(user: User, task: Assignment) {
+    fun
+            navigateToDetailPage(user: User, task: Assignment) {
         _uiState.update {
             it.copy(isShowingListPage = false)
         }

@@ -20,6 +20,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kz.narxoz.canvasdiplom.R
+import kz.narxoz.canvasdiplom.data.LocalAssignmentDataProvider
 import kz.narxoz.canvasdiplom.data.LocalCoursesDataProvider
 import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.data.LocalTasksDataProvider
@@ -152,20 +153,20 @@ fun CurrentTaskCardInfo(
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun TaskDetailsPreview() {
-//    CanvasDiplomTheme {
-//
-//        val user = LocalUsersDataProvider.getUserByID(3) //S1
-//
-//        val course = LocalCoursesDataProvider.getStaticCoursesData()[0]
+@Preview(showBackground = true)
+@Composable
+fun TaskDetailsPreview() {
+    CanvasDiplomTheme {
+
+        val user = LocalUsersDataProvider.getUserByID(3) //S1
+
+        val course = LocalCoursesDataProvider.getStaticCoursesData()[0]
 //        val filteredTasks = LocalTasksDataProvider.getStaticTasksData().filter { task: Task -> task.courseID == course.id }
-//        val currentTask = filteredTasks[0]
-//        val viewModel: TasksViewModel = viewModel()
-//        val navController = rememberNavController()
-//
-//        TaskDetailsScreen(navController = navController, task = currentTask, user = user, course = course, viewModel = viewModel)
-////        TasksScreen(user = user, course = course)
-//    }
-//}
+        val currentTask = LocalAssignmentDataProvider.getAssignmentByID(0)//filteredTasks[0]
+        val viewModel: TasksViewModel = viewModel()
+        val navController = rememberNavController()
+
+        TaskDetailsScreen(navController = navController, task = currentTask, user = user, course = course, viewModel = viewModel)
+//        TasksScreen(user = user, course = course)
+    }
+}

@@ -55,13 +55,13 @@ fun InfoPanelDaysList(
     assignmentsList: List<Assignment>,
     navController: NavController
 ){
-    val userAssignments = LocalAssignmentDataProvider.getUserAssignmentsSortedByDeadline(user.id)
+//    val userAssignments = LocalAssignmentDataProvider.getUserAssignmentsSortedByDeadline(user.id)
     InfoPanelTasksListInDay(
         modifier = Modifier
             .padding(dimensionResource(id = R.dimen.padding_medium)),
         user = user,
         day = LocalDateTime.of(2024, 2, 20, 0, 0),
-        sortedAssignmentsList = userAssignments,
+        sortedAssignmentsList = assignmentsList, //userAssignments,
         navController = navController
     )
 }
@@ -72,7 +72,8 @@ fun InfoPanelTasksListInDay(
     user: User,
     day: LocalDateTime,
     sortedAssignmentsList: List<Assignment>,
-    navController: NavController
+    navController: NavController,
+    viewModel: TasksViewModel = viewModel(),
 ){
     Column (
         modifier = modifier
@@ -90,10 +91,9 @@ fun InfoPanelTasksListInDay(
 //                    title = LocalCoursesDataProvider.getCourseByID(assignment.assignmentGroupId).title.toString(),
                     description = assignment.description,
                     navController = navController,
-                    route = Screen.TaskDetails.createRoute(assignment.id)
-                ) {
-
-                }
+                    route = Screen.TaskDetails.createRoute(assignment.id),
+//                    onClick = { viewModel.navigateToDetailPage(user, assignment) }
+                ){}
             }
         }
     }

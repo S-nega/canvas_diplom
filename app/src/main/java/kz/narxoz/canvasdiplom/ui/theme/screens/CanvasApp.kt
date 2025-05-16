@@ -25,6 +25,7 @@ import kz.narxoz.canvasdiplom.models.UserRole
 import kz.narxoz.canvasdiplom.viewModels.TasksViewModel
 import kz.narxoz.canvasdiplom.ui.theme.components.BaseBottomBar
 import kz.narxoz.canvasdiplom.ui.theme.components.BaseTopBar
+import kz.narxoz.canvasdiplom.ui.theme.screens.courses.CourseRegistrationScreen
 import kz.narxoz.canvasdiplom.ui.theme.screens.courses.CoursesScreen
 import kz.narxoz.canvasdiplom.ui.theme.screens.tasks.TaskDetailsScreen
 import kz.narxoz.canvasdiplom.ui.theme.screens.tasks.TaskEditScreen
@@ -108,18 +109,20 @@ fun MainScreen() {
             composable(Screen.Profile.route) { ProfileScreen(Modifier, user = user, navController = navController, viewModel = viewModel) }
             composable(Screen.Info.route) { InfoPanelScreen(Modifier, user, assignments, navController = navController) }
             composable(Screen.Calendar.route) { CalendarScreen(Modifier, navController) }
-            composable(Screen.Courses.route) { CoursesScreen(Modifier, user, courses, navController) }
+            composable(Screen.Courses.route) { CourseRegistrationScreen(Modifier, user, courses) }
+//            composable(Screen.Courses.route) { CoursesScreen(Modifier, user, courses, navController) }
             composable(Screen.Tasks.route) { TasksScreen(Modifier, navController, user, course) }
             composable(Screen.TaskDetails.route) { backStackEntry ->
                 val assignmentId = backStackEntry.arguments?.getLong("assignmentId")
-                Log.d("TaskDetails", "Task id: ${backStackEntry.arguments?.getString("assignmentId")}")
+                Log.d("TaskDetails", "Task id: ${backStackEntry.arguments?.getLong("assignmentId")}")
+                Log.d("TaskDetails", "Task id: ${assignmentId}")
                 if (assignmentId != null) {
                     TaskDetailsScreen(navController, viewModel, assignments.find { assignment: Assignment -> assignment.id == assignmentId }!!, user, course)
                 }
             }
             composable(Screen.TaskEdit.route) { backStackEntry ->
                 val assignmentId = backStackEntry.arguments?.getLong("assignmentId")
-                Log.d("TaskDetails", "Task id: ${backStackEntry.arguments?.getString("assignmentId")}")
+                Log.d("TaskDetails", "Task id: ${backStackEntry.arguments?.getLong("assignmentId")}")
                 if (assignmentId != null) {
                     TaskEditScreen(assignments.find { assignment: Assignment -> assignment.id == assignmentId }!!, user)
                 }

@@ -68,8 +68,8 @@ fun TasksList(
 //                grade = task.scores.find { it.studentId == user.id }?.grade,
                 navController = navController,
                 route = Screen.TaskDetails.createRoute(task.id),
-                onClick = { viewModel.navigateToDetailPage(user, task) }
-            )
+//                onClick = { viewModel.navigateToDetailPage(user, task) }
+            ){}
         }
     }
 }
